@@ -180,3 +180,38 @@ html, body {
 .lz-body .lz-desc .keyword {
   font-weight: bold;
 }
+
+.lz-modal .lz-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 2em;
+  position: relative;
+}
+
+.lz-nav .lz-button {
+  margin-top: 1em;
+}
+
+.lz-nav .lz-button a {
+  text-decoration: none;
+  color: #444;
+  border: 1px solid #999;
+  padding: .5em .75em;
+  border-radius: 5px;
+  font-family: arial, sans-serif;
+  font-size: 15px;
+}
+
+.lz-nav .lz-page-status {
+  text-align: center;
+}
+
+.lz-total-num {
+  font-size: 14px;
+}
+
+.lz-num-suffix {
+  font-size: 13px;
+  padding-left: .5em;
+}
