@@ -98,8 +98,7 @@ html, body {
 
 .lz-search-form > .lz-keyword {
   font-size: 16px;
-  /* JS の計算処理が必要 */
-  width: 88%;
+  width: 95%;
   height: 28px;
   margin-left: 5px;
   position: relative;
@@ -110,6 +109,7 @@ html, body {
   position: relative;
   top: 1px;
   left: 2px;
+  width: 24px;
 
   font-size: 20px;
   font-family: arial, sans-serif;
@@ -134,8 +134,6 @@ html, body {
 }
 
 .lz-modal .lz-body {
-  /* js で処理が必要 */
-  height: calc(100vh - 135px);
   padding-left: 25px;
   padding-right: 25px;
   overflow-y: scroll;
