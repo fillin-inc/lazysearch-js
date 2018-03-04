@@ -90,7 +90,7 @@ html, body {
   display: inline-flex;
   flex-direction: row;
 
-  width: 92%;
+  width: 100%;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   position: relative;
@@ -98,34 +98,34 @@ html, body {
 
 .lz-search-form > .lz-keyword {
   font-size: 16px;
-  width: 89%;
+  /* JS の計算処理が必要 */
+  width: 88%;
   height: 28px;
-  margin-left: .8em;
+  margin-left: 5px;
   position: relative;
-  top: 1px;
 }
 
 .lz-search-form > .lz-x {
   display: none;
   position: relative;
-  top: 2px;
+  top: 1px;
   left: 2px;
 
-  font-size: 23px;
+  font-size: 20px;
   font-family: arial, sans-serif;
   color: #757575;
-  text-align: center;
   cursor: pointer;
 }
 
 .lz-search-form > .lz-button {
   background: #46A1EF;
   width: 44px;
-  height: 103%;
+  height: 30px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   position: absolute;
   right: 0;
+  top: -1px;
   cursor: pointer;
 }
 
