@@ -78,9 +78,14 @@ html, body {
 
 .lz-modal .lz-cancel {
   display: block;
+  color: #2196F3;
   font-size: 13px;
   padding-left: 10px;
   padding-top: 5px;
+}
+
+.lz-modal .lz-cancel:visited {
+  color: #666;
 }
 
 .lz-modal .lz-search-form {
@@ -136,4 +141,42 @@ html, body {
 
 .lz-search-form > .lz-button svg {
   width: 16px;
+}
+
+.lz-modal .lz-body {
+  height: calc(100vh - 140px);
+  padding-left: 25px;
+  padding-right: 25px;
+  overflow: scroll;
+}
+
+.lz-body .lz-result {
+  margin-top: 1.4em;
+  font-size: 13px;
+}
+
+.lz-body .lz-result a {
+  color: #2196F3;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lz-body .lz-result h3 {
+  font-size: 15px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.lz-body .lz-result .url {
+  color: #20C133;
+  font-size: 13px;
+  margin: 0;
+}
+
+.lz-body .lz-desc {
+  margin-top: .3em;
+}
+
+.lz-body .lz-desc .keyword {
+  font-weight: bold;
 }
