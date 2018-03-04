@@ -11,6 +11,27 @@ html, body {
 }
 
 /*
+ * initialize
+ */
+.lz-modal form {
+  margin: 0;
+  padding: 0;
+}
+
+.lz-search-form input, button {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+/*
  * search modal
  */
 .lz-modal {
@@ -33,13 +54,77 @@ html, body {
 }
 
 .lz-modal .lz-inner {
-  height: calc(100vh - 60px);
+  height: calc(100vh - 40px);
   width: calc(100vw - 500px);
   position: fixed;
   top: calc(100vh - calc(100vh - 10px));
   left: calc(100vw - calc(100vw - 250px));
 
-  padding: 20px 25px;
   border-radius: 7px;
   background: #fff;
+}
+
+.lz-modal .lz-header {
+  padding: 20px 25px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.lz-modal .lz-search {
+
+}
+
+.lz-modal .lz-cancel {
+  font-size: 13px;
+  padding-left: 5px;
+}
+
+.lz-modal .lz-search-form {
+  display: inline-block;
+  font-size: 16px;
+  height: 30px;
+  width: 92%;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  position: relative;
+}
+
+.lz-search-form > .lz-keyword {
+  font-size: 16px;
+  width: 87.5%;
+  height: 95%;
+  margin-left: .7em;
+  position: relative;
+  top: 1px;
+}
+
+.lz-search-form > .lz-x {
+  display: none;
+  position: relative;
+  top: 2px;
+  left: 2px;
+
+  font-size: 23px;
+  font-family: arial, sans-serif;
+  color: #757575;
+  text-align: center;
+  cursor: pointer;
+}
+
+.lz-search-form.has-keyword > .lz-x {
+  display: inline;
+}
+
+.lz-search-form > .lz-button {
+  background: #46A1EF;
+  width: 44px;
+  height: 103%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.lz-search-form > .lz-button svg {
+  width: 16px;
 }
