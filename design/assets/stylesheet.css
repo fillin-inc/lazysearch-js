@@ -6,8 +6,9 @@ html, body {
 }
 
 .base {
-  width: 1400px;
+  max-width: 1400px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 /*
@@ -18,13 +19,12 @@ html, body {
   padding: 0;
 }
 
-.lz-search-form input, button {
+.lz-search-form input, .lz-search-form button {
   margin: 0;
   padding: 0;
   background: none;
   border: none;
   border-radius: 0;
-  outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -35,13 +35,13 @@ html, body {
  * search modal
  */
 .lz-modal {
-  display: block;
+  display: none;
   position: relative;
   z-index: 200;
-}
 
-.lz-modal.is-active {
-  display: block;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .lz-modal .lz-background {
@@ -54,14 +54,12 @@ html, body {
 }
 
 .lz-modal .lz-inner {
-  height: calc(100vh - 40px);
-  width: calc(100vw - 500px);
-  min-width: 640px;
+  height: 96%;
+  min-width: 440px;
   max-width: 840px;
 
   position: fixed;
-  top: calc(100vh - calc(100vh - 10px));
-  left: calc(100vw - calc(100vw - 250px));
+  top: 10px;
 
   border-radius: 7px;
   background: #fff;
@@ -70,12 +68,13 @@ html, body {
 .lz-modal .lz-header {
   padding: 20px 25px;
   border-bottom: 1px solid #d9d9d9;
-  box-shadow: 0px 2px 3px -3px rgba(60, 60, 60, .42)
+  box-shadow: 0 2px 3px -3px rgba(60, 60, 60, .42)
 }
 
 .lz-modal .lz-search {
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 .lz-modal .lz-cancel {
@@ -94,10 +93,7 @@ html, body {
   display: inline-flex;
   flex-direction: row;
 
-  font-size: 16px;
-  height: 30px;
-  width: calc(100vw - 600px);
-  min-width: 533px;
+  width: 92%;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   position: relative;
@@ -105,10 +101,9 @@ html, body {
 
 .lz-search-form > .lz-keyword {
   font-size: 16px;
-  width: calc(100vw - 690px);
-  min-width: 448px;
+  width: 89%;
   height: 28px;
-  margin-left: .7em;
+  margin-left: .8em;
   position: relative;
   top: 1px;
 }
@@ -124,10 +119,6 @@ html, body {
   color: #757575;
   text-align: center;
   cursor: pointer;
-}
-
-.lz-search-form.has-keyword > .lz-x {
-  display: inline;
 }
 
 .lz-search-form > .lz-button {
@@ -146,7 +137,7 @@ html, body {
 }
 
 .lz-modal .lz-body {
-  height: calc(100vh - 140px);
+  height: calc(100vh - 135px);
   padding-left: 25px;
   padding-right: 25px;
   overflow-y: scroll;
@@ -172,7 +163,6 @@ html, body {
 .lz-body .lz-result .url {
   color: #20C133;
   margin: 0;
-  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -187,11 +177,12 @@ html, body {
 }
 
 .lz-modal .lz-nav {
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: space-around;
   position: relative;
   margin-top: 2.5em;
+  margin-bottom: 1.3em;
 }
 
 .lz-nav .lz-button {
@@ -199,6 +190,7 @@ html, body {
 }
 
 .lz-nav .lz-button a {
+  display: none;
   padding: .5em .75em;
   color: #444;
   font-family: arial, sans-serif;
@@ -224,4 +216,26 @@ html, body {
 .lz-num-suffix {
   font-size: 13px;
   padding-left: .5em;
+}
+
+.lz-modal.is-active, .lz-nav.is-active {
+  display: flex;
+}
+
+.lz-button.is-active > a {
+  display: block;
+}
+
+.lz-search-form.has-keyword > .lz-x {
+  display: inline;
+}
+
+@media screen and (max-width: 800px) {
+  .lz-modal .lz-inner {
+    top: 0;
+    height: 100%;
+  }
+  .lz-modal .lz-body {
+    height: calc(100vh - 100px);
+  }
 }
