@@ -69,6 +69,7 @@ html, body {
 .lz-modal .lz-header {
   padding: 20px 25px;
   border-bottom: 1px solid #d9d9d9;
+  box-shadow: 0px 2px 3px -3px rgba(60, 60, 60, .42)
 }
 
 .lz-modal .lz-search {
