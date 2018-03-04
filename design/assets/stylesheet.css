@@ -56,6 +56,8 @@ html, body {
 .lz-modal .lz-inner {
   height: calc(100vh - 40px);
   width: calc(100vw - 500px);
+  min-width: 640px;
+
   position: fixed;
   top: calc(100vh - calc(100vh - 10px));
   left: calc(100vw - calc(100vw - 250px));
@@ -70,19 +72,25 @@ html, body {
 }
 
 .lz-modal .lz-search {
-
+  display: flex;
+  flex-direction: row;
 }
 
 .lz-modal .lz-cancel {
+  display: block;
   font-size: 13px;
-  padding-left: 5px;
+  padding-left: 10px;
+  padding-top: 5px;
 }
 
 .lz-modal .lz-search-form {
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: row;
+
   font-size: 16px;
   height: 30px;
-  width: 92%;
+  width: calc(100vw - 600px);
+  min-width: 533px;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   position: relative;
@@ -90,8 +98,9 @@ html, body {
 
 .lz-search-form > .lz-keyword {
   font-size: 16px;
-  width: 87.5%;
-  height: 95%;
+  width: calc(100vw - 690px);
+  min-width: 448px;
+  height: 28px;
   margin-left: .7em;
   position: relative;
   top: 1px;
