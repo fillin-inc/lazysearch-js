@@ -30,7 +30,6 @@ html, body {
   appearance: none;
 }
 
-
 /*
  * search modal
  */
@@ -55,8 +54,6 @@ html, body {
 
 .lz-modal .lz-inner {
   height: 96%;
-  min-width: 440px;
-  max-width: 840px;
 
   position: fixed;
   top: 10px;
@@ -137,10 +134,12 @@ html, body {
 }
 
 .lz-modal .lz-body {
+  /* js で処理が必要 */
   height: calc(100vh - 135px);
   padding-left: 25px;
   padding-right: 25px;
   overflow-y: scroll;
+  border-bottom: 1px solid rgba(60, 60, 60, .15);
 }
 
 .lz-body .lz-result {
@@ -234,8 +233,5 @@ html, body {
   .lz-modal .lz-inner {
     top: 0;
     height: 100%;
-  }
-  .lz-modal .lz-body {
-    height: calc(100vh - 100px);
   }
 }
