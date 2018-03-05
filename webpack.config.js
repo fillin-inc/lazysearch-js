@@ -21,6 +21,12 @@ module.exports = {
           minimize: true
         }
       }]
+    },{
+      test: /\.css$/,
+      use: [
+        { loader: 'style-loader', options: { attrs: { id: 'lz-style' } } },
+        { loader: 'css-loader' }
+      ]
     }]
   }
 };
