@@ -12,19 +12,7 @@ module.exports = {
     rules: [{
       test: /\.js$/,
       exclude: /node_modules|\.tmp|vendor/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            ['env', {
-              'targets': {
-                'browsers': ['> 1%', 'last 2 versions', 'not ie <=  9']
-              }
-            }],
-          ],
-          comments: false
-        }
-      }
+      use: { loader: 'babel-loader' }
     },{
       test: /\.html$/,
       use: [{
