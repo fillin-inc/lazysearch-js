@@ -13,6 +13,14 @@ module.exports = {
       test: /src\/*\.js$/,
       loader: 'babel-loader',
       exclude: /node_modules|\.tmp|vendor/
+    },{
+      test: /\.html$/,
+      use: [{
+        loader: 'html-loader',
+        options: {
+          minimize: true
+        }
+      }]
     }]
   }
 };
