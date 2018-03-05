@@ -10,9 +10,21 @@ module.exports = {
 
   module: {
     rules: [{
-      test: /src\/*\.js$/,
-      loader: 'babel-loader',
-      exclude: /node_modules|\.tmp|vendor/
+      test: /\.js$/,
+      exclude: /node_modules|\.tmp|vendor/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ['env', {
+              'targets': {
+                'browsers': ['> 1%', 'last 2 versions', 'not ie <=  9']
+              }
+            }],
+          ],
+          comments: false
+        }
+      }
     },{
       test: /\.html$/,
       use: [{
