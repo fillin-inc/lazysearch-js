@@ -33,7 +33,7 @@ export default class Modal {
         const cross   = this.el.getElementsByClassName('lz-x')[0];
         const btn     = this.el.getElementsByClassName('lz-button')[0];
 
-        keyword.style.width = (target.clientWidth - (cross.clientWidth + btn.clientWidth + 12)).toString() + 'px';$
+        keyword.style.width = (target.clientWidth - (cross.clientWidth + btn.clientWidth + 12)).toString() + 'px';
     }
 
     static hasSearch() {
