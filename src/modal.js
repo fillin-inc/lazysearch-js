@@ -18,12 +18,22 @@ export default class Modal {
 
     open() {
         this.el.classList.add('is-active');
+        this.setKeywordWidth();
     }
 
     close() {
         if (this.el.classList.contains('is-active')) {
             this.el.classList.remove('is-active');
         }
+    }
+
+    setKeywordWidth() {
+        const target  = this.el.getElementsByClassName('lz-search-form')[0];
+        const keyword = this.el.getElementsByClassName('lz-keyword')[0];
+        const cross   = this.el.getElementsByClassName('lz-x')[0];
+        const btn     = this.el.getElementsByClassName('lz-button')[0];
+
+        keyword.style.width = (target.clientWidth - (cross.clientWidth + btn.clientWidth + 12)).toString() + 'px';$
     }
 
     static hasSearch() {
