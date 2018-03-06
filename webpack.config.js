@@ -24,7 +24,7 @@ module.exports = {
     },{
       test: /\.css$/,
       use: [
-        { loader: 'style-loader', options: { attrs: { id: 'lz-style' } } },
+        { loader: 'style-loader/useable', options: { attrs: { id: 'lz-style' } } },
         { loader: 'css-loader' }
       ]
     }]
