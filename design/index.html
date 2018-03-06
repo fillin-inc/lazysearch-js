@@ -160,7 +160,6 @@
     <script type="text/javascript">
         window.onload = function () {
             setKeywordWidth();
-            setLzBodyHeight();
         };
 
         function setKeywordWidth() {
@@ -170,14 +169,6 @@
             var btn      = target.getElementsByClassName('lz-button')[0];
 
             keyInput.style.width = (target.clientWidth - (cross.clientWidth + btn.clientWidth + 12)).toString() + 'px';
-        }
-
-        function setLzBodyHeight() {
-            var inner  = document.getElementsByClassName('lz-inner')[0];
-            var header = document.getElementsByClassName('lz-header')[0];
-            var body   = document.getElementsByClassName('lz-body')[0];
-
-            body.style.height = (inner.clientHeight - (header.clientHeight + 15)).toString() + 'px';
         }
     </script>
   </body>
