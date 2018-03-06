@@ -165,11 +165,11 @@ html, body {
   text-overflow: ellipsis;
 }
 
-.lz-body .lz-desc {
+.lz-body .desc {
   margin-top: .2em;
 }
 
-.lz-body .lz-desc .keyword {
+.lz-body .desc .keyword {
   font-weight: bold;
 }
 
