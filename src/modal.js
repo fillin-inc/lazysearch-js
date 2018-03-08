@@ -1,6 +1,6 @@
 export default class Modal {
-    constructor(modalElem) {
-        this.el = modalElem;
+    constructor(el) {
+        this._el = el;
     }
 
     append() {
@@ -9,34 +9,30 @@ export default class Modal {
             console.log('lz.js could not find <body> tag.');
             return;
         }
-        body[0].appendChild(this.el);
-    }
-
-    isVisible() {
-        return !(this.el.offsetWidth === 0 && this.el.offsetHeight === 0);
+        body[0].appendChild(this._el);
     }
 
     open() {
-        this.el.classList.add('is-active');
-        this.setKeywordWidth();
+        this._el.classList.add('is-active');
+        this._setKeywordWidth();
     }
 
     close() {
-        if (this.el.classList.contains('is-active')) {
-            this.el.classList.remove('is-active');
+        if (this._el.classList.contains('is-active')) {
+            this._el.classList.remove('is-active');
         }
     }
 
-    setKeywordWidth() {
-        const target  = this.el.getElementsByClassName('lz-search-form')[0];
-        const keyword = this.el.getElementsByClassName('lz-keyword')[0];
-        const cross   = this.el.getElementsByClassName('lz-x')[0];
-        const btn     = this.el.getElementsByClassName('lz-button')[0];
-
-        keyword.style.width = (target.clientWidth - (cross.clientWidth + btn.clientWidth + 12)).toString() + 'px';
+    isVisible() {
+        return !(this._el.offsetWidth === 0 && this._el.offsetHeight === 0);
     }
 
-    static hasSearch() {
-        return document.querySelector('[data-lz]').length >= 1;
+    _setKeywordWidth() {
+        const target  = this._el.querySelector('[data-lz-form]');
+        const keyword = this._el.querySelector('[data-lz-query]');
+        const cross   = this._el.querySelector('[data-lz-x]');
+        const btn     = this._el.querySelector('[data-lz-btn]');
+
+        keyword.style.width = (target.clientWidth - (cross.clientWidth + btn.clientWidth + 65)).toString() + 'px';
     }
 }

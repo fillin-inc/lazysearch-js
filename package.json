@@ -35,5 +35,8 @@
   "engines": {
     "node": ">= 8.9",
     "npm": ">= 5.6"
+  },
+  "dependencies": {
+    "custom-event": "^1.0.1"
   }
 }
