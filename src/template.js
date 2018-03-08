@@ -3,27 +3,27 @@ import result from './templates/result.html';
 
 export default class Template {
     constructor() {
-        this.getModal();
-        this.getResultRow();
+        this._setModal();
+        this._setResult();
     }
 
-    getModal() {
-        if (this.modal) {
-            return this.modal;
-        }
+    modal() {
+        return this._modal;
+    }
+
+    result() {
+        return this._result;
+    }
+
+    _setModal() {
         const el = document.createElement('div');
         el.innerHTML = modal;
-        this.modal = el.querySelector('[data-lz-modal]');
-        return this.modal;
+        this._modal = el.querySelector('[data-lz-modal]');
     }
 
-    getResultRow() {
-        if (this.resultRow) {
-            return this.resultRow;
-        }
+    _setResult() {
         const el = document.createElement('div');
         el.innerHTML = result;
-        this.resultRow = el.querySelector('.lz-result');
-        return this.resultRow;
+        this._result = el.querySelector('.lz-result');
     }
 }
