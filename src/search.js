@@ -16,10 +16,13 @@ export default class Search {
 
     fetch(keyword, params = null) {
         this._updateParams(params)
-        return fetch(this.endpoint + '?' + this.reqQuery(keyword),  { mode: 'cors' });
+        return fetch(
+            this.endpoint + '?' + this._reqQuery(keyword),
+            { mode: 'cors' }
+        );
     }
 
-    reqQuery(keyword) {
+    _reqQuery(keyword) {
         const reqParams = this.params;
         reqParams.keyword = keyword;
         return Object.keys(reqParams)
