@@ -1,4 +1,5 @@
 import Modal from './modal';
+import Search from './search';
 import Style from './templates/stylesheet.css';
 import Template from './template';
 
@@ -9,8 +10,12 @@ window.onload = function () {
     if (!Modal.hasSearch()) {
         return;
     }
+
     Style.use();
     modal.append();
+
+    const search = new Search({ uuid: document.querySelector('[data-lz] [name=uuid]').value });
+    search.fetch('api');
 
     const mainQuery           = document.querySelector('[data-lz-query-in-modal]');
     const searchBtns          = document.querySelectorAll('[data-lz-btn]');
