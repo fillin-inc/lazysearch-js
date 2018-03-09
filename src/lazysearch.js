@@ -46,12 +46,31 @@ export default class LazySearch {
             btns[i].addEventListener('click', function (event) {
                 event.preventDefault();
                 let params = self._collectParams(document.querySelector('[data-lz]'));
-                self._search.fetch(params);
+                self._search.fetch(params).then(self._drawResult);
                 if (!self._modal.isVisible()) {
                     self._modal.open();
                 }
             });
         }
+    }
+
+    _drawResult(res) {
+        const wrapper = document.querySelector('[data-lz-modal] .lz-results');
+        if (!res.ok) {
+            wrapper.classList.add('has-error');
+            const p = document.createElement('p');
+            res.json().then((body) => {
+                let errors = [];
+                body.errors.forEach(function (val, idx, ary) {
+                    errors.push(val.message + '(' + val.error_id + ')');
+                });
+                p.innerHTML = errors.join("\n<br>\n");
+                wrapper.appendChild(p);
+            });
+            return;
+        }
+
+        wrapper.classList.remove('has-error');
     }
 
     _setTargetElements(formElm) {
@@ -72,7 +91,6 @@ export default class LazySearch {
             return params;
         }
 
-        console.log(formElm);
         window.formElm = formElm;
         for (let key in this._targets) {
             elm = formElm.querySelector('[' + this._targets[key] + ']');
