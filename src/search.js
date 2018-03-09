@@ -4,6 +4,7 @@ export default class Search {
         this.params = {
             current_page:1,
             format: 'json',
+            keyword: null,
             per_page: 10,
             uuid: null
         };
@@ -14,17 +15,16 @@ export default class Search {
         }
     }
 
-    fetch(keyword, params = null) {
+    fetch(params) {
         this._updateParams(params)
         return fetch(
-            this.endpoint + '?' + this._reqQuery(keyword),
+            this.endpoint + '?' + this._reqQuery(),
             { mode: 'cors' }
         );
     }
 
-    _reqQuery(keyword) {
+    _reqQuery() {
         const reqParams = this.params;
-        reqParams.keyword = keyword;
         return Object.keys(reqParams)
             .map(k => k + '=' + encodeURIComponent(reqParams[k]))
             .join('&');
