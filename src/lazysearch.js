@@ -15,6 +15,7 @@ export default class LazySearch {
         this._template = new Template();
         this._modal    = new Modal(this._template.modal());
         this._modal.append();
+        this._setTargetElements();
         this._readySearch();
     }
 
@@ -44,11 +45,43 @@ export default class LazySearch {
         for (i = 0; i < btnLength; i += 1) {
             btns[i].addEventListener('click', function (event) {
                 event.preventDefault();
+                let params = self._collectParams(document.querySelector('[data-lz]'));
+                self._search.fetch(params);
                 if (!self._modal.isVisible()) {
                     self._modal.open();
                 }
             });
         }
+    }
+
+    _setTargetElements(formElm) {
+        this._targets = {
+            current_page: 'data-lz-current-page',
+            format:       'data-lz-format',
+            keyword:      'data-lz-keyword',
+            per_page:     'data-lz-per-page',
+            uuid:         'data-lz-uuid'
+        }
+    }
+
+    _collectParams(formElm) {
+        let params = {};
+        let elm = null;
+
+        if (formElm === null || formElm === undefined) {
+            return params;
+        }
+
+        console.log(formElm);
+        window.formElm = formElm;
+        for (let key in this._targets) {
+            elm = formElm.querySelector('[' + this._targets[key] + ']');
+            if (elm !== null) {
+                params[key] = elm.value;
+            }
+            elm = null;
+        }
+        return params;
     }
 
     static hasSearch() {
