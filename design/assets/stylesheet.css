@@ -74,7 +74,7 @@ html, body {
   flex-direction: row;
 }
 
-.lz-modal .lz-cancel {
+.lz-modal .lz-close {
   display: block;
   color: #2196F3;
   font-size: 13px;
@@ -82,7 +82,9 @@ html, body {
   padding-top: 5px;
 }
 
-.lz-modal .lz-cancel:visited {
+.lz-modal .lz-close,
+.lz-modal .lz-close:hover,
+.lz-modal .lz-close:visited {
   color: #666;
 }
 
@@ -101,6 +103,11 @@ html, body {
   height: 28px;
   margin-left: 5px;
   position: relative;
+}
+
+.lz-search-form > .lz-keyword:focus,
+.lz-search-form > .lz-x:focus {
+  outline: 0;
 }
 
 .lz-search-form > .lz-x {
