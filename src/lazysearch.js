@@ -3,7 +3,6 @@ import Promise from 'promise-polyfill';
 import Search from './search';
 import Style from './templates/stylesheet.css';
 import Template from './template';
-import Throttle from 'throttleit';
 
 export default class LazySearch {
     constructor() {
@@ -74,33 +73,6 @@ export default class LazySearch {
             });
         }
 
-        // x ボタンで検索キーワードを削除
-        this._modal.el().querySelector('.lz-header .lz-x').addEventListener('click', function (event) {
-            event.preventDefault();
-            this.previousElementSibling.value = '';
-            this.parentNode.classList.remove('has-keyword');
-        });
-
-        // キーアップ時に入力内容が空であれば has-keyword クラスを削除
-        this._modal.el().querySelector('.lz-header .lz-keyword').addEventListener('keyup', Throttle(function (event) {
-            self._modal.setHasKeyword();
-        }, 250));
-
-        // cancel でモーダルを閉じる
-        this._modal.el().getElementsByClassName('lz-close')[0].addEventListener('click', function (event) {
-            event.preventDefault();
-            document.querySelector('[data-lz-modal]').classList.remove('is-active');
-        });
-
-        // 背景色クリックでモーダルを閉じる
-        document.getElementsByClassName('lz-background')[0].addEventListener('click', function (event) {
-            event.preventDefault();
-            document.querySelector('[data-lz-modal]').classList.remove('is-active');
-        });
-
-        window.onresize = Throttle(function () {
-            self._modal.setKeywordWidth();
-        }, 300);
     }
 
     // 検索結果の描画

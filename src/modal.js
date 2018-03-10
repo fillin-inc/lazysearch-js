@@ -1,3 +1,5 @@
+import Throttle from 'throttleit';
+
 export default class Modal {
     constructor(el) {
         this._el = el;
@@ -15,6 +17,7 @@ export default class Modal {
             return;
         }
         body[0].appendChild(this._el);
+        this._setEvent();
     }
 
     // モーダルを開く
@@ -55,5 +58,32 @@ export default class Modal {
         } else {
             searchForm.classList.remove('has-keyword');
         }
+    }
+
+    // イベントを設定
+    _setEvent() {
+        const self = this;
+
+        // x ボタンで検索キーワードを削除
+        this._el.querySelector('.lz-header .lz-x').addEventListener('click', function (event) {
+            event.preventDefault();
+            this.previousElementSibling.value = '';
+            this.parentNode.classList.remove('has-keyword');
+        });
+
+        // キーアップ時に入力内容が空であれば has-keyword クラスを削除
+        this._el.querySelector('.lz-header .lz-keyword').addEventListener('keyup', Throttle(function (event) {
+            self.setHasKeyword();
+        }, 250));
+
+        // cancel でモーダルを閉じる
+        this._el.getElementsByClassName('lz-close')[0].addEventListener('click', function (event) {
+            event.preventDefault();
+            document.querySelector('[data-lz-modal]').classList.remove('is-active');
+        });
+
+        window.onresize = Throttle(function () {
+            self.setKeywordWidth();
+        }, 250);
     }
 }
