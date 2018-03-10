@@ -48,4 +48,14 @@ export default class Search {
             this.endpoint = url;
         }
     }
+
+    static getQuery() {
+        const matched = location.search.match(/(\?|&)q=(.*?)(&|$)/);
+        return (matched === null) ? '' : decodeURIComponent(matched[2]);
+    }
+
+    static getPageInQuery() {
+        const matched = location.search.match(/(\?|&)page=(\d+)(&|$)/);
+        return (matched === null) ? 1 : parseInt(matched[2], 10);
+    }
 }
