@@ -7,6 +7,7 @@ export default class Modal {
         return this._el;
     }
 
+    // モーダルを閉じ body タグ直前に展開
     append() {
         const body = document.getElementsByTagName('body');
         if (body.length === 0) {
@@ -16,22 +17,26 @@ export default class Modal {
         body[0].appendChild(this._el);
     }
 
+    // モーダルを開く
     open() {
         this._el.classList.add('is-active');
         this._setKeywordWidth();
         this._setHasKeyword();
     }
 
+    // モーダルを閉じる
     close() {
         if (this._el.classList.contains('is-active')) {
             this._el.classList.remove('is-active');
         }
     }
 
+    // モーダルが表示されているかチェック
     isVisible() {
         return !(this._el.offsetWidth === 0 && this._el.offsetHeight === 0);
     }
 
+    // キーワード入力欄の表示調整
     _setKeywordWidth() {
         const target     = this._el.getElementsByTagName('form')[0];
         const keyword    = this._el.getElementsByClassName('lz-keyword')[0];
@@ -41,6 +46,7 @@ export default class Modal {
         keyword.style.width = (target.clientWidth - (crossWidth + btn.clientWidth + 65)).toString() + 'px';
     }
 
+    // キーワード有無によるクラス付与処理
     _setHasKeyword() {
         const searchForm    = this._el.getElementsByClassName('lz-search-form')[0];
         const searchKeyword = this._el.getElementsByClassName('lz-keyword')[0];
