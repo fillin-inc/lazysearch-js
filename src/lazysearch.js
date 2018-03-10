@@ -15,11 +15,11 @@ export default class LazySearch {
         this._modal    = new Modal((new Template()).modal());
         this._modal.append();
         this._setTargetElements();
-        this._serSearchEvent();
+        this._setSearchEvent();
     }
 
     // 検索処理用のイベントを設定
-    _serSearchEvent() {
+    _setSearchEvent() {
         const self           = this;
         const btns           = document.querySelectorAll('[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button');
         const queries        = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
@@ -53,6 +53,10 @@ export default class LazySearch {
                     .then(self._drawNavi)
                 if (!self._modal.isVisible()) {
                     self._modal.open();
+                }
+
+                if (history.pushState) {
+                    history.pushState(null, null, location.pathname + '?q=' + encodeURIComponent(params.keyword));
                 }
             });
         }
