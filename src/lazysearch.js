@@ -124,6 +124,7 @@ export default class LazySearch {
                     wrapper.appendChild(p);
                 }
 
+                document.querySelector('[data-lz-modal] .lz-body').scrollTop = 0;
                 return {
                     navigation:   showNavigation,
                     page:         parseInt(body.current_page, 10),
