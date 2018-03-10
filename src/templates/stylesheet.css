@@ -63,7 +63,7 @@
   flex-direction: row;
 }
 
-.lz-modal .lz-cancel {
+.lz-modal .lz-close {
   display: block;
   color: #2196F3;
   font-size: 13px;
@@ -71,7 +71,9 @@
   padding-top: 5px;
 }
 
-.lz-modal .lz-cancel:visited {
+.lz-modal .lz-close,
+.lz-modal .lz-close:hover,
+.lz-modal .lz-close:visited {
   color: #666;
 }
 

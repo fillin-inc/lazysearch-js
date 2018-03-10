@@ -87,7 +87,7 @@ export default class LazySearch {
         }, 250));
 
         // cancel でモーダルを閉じる
-        this._modal.el().getElementsByClassName('lz-cancel')[0].addEventListener('click', function (event) {
+        this._modal.el().getElementsByClassName('lz-close')[0].addEventListener('click', function (event) {
             event.preventDefault();
             document.querySelector('[data-lz-modal]').classList.remove('is-active');
         });
