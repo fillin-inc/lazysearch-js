@@ -1,16 +1,5 @@
 @charset 'utf-8';
 
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-.base {
-  max-width: 1400px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
 /*
  * initialize
  */
