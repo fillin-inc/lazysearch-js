@@ -238,3 +238,18 @@
     width: 100%;
   }
 }
+
+@keyframes fadeIn {
+  0% { opacity: 0 }
+  100% { opacity: 100% }
+}
+
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0 }
+  100% { opacity: 100% }
+}
+
+.lz-modal.is-active {
+  animation: fadeIn .2s ease 0s 1 normal;
+  -webkit-animation: fadeIn .2s eqse 0s 1 normal;
+}
