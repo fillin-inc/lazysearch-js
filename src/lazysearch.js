@@ -22,10 +22,10 @@ export default class LazySearch {
     _readySearch(modal) {
         const self = this;
         const btns          = document.querySelectorAll('[data-lz-btn]');
-        const queries       = document.querySelectorAll('[data-lz-query]');
+        const queries       = document.querySelectorAll('[data-lz-keyword]');
         const btnLength     = btns.length;
         const queriesLength = queries.length;
-        const mainQuery     = document.querySelector('[data-lz-modal] [data-lz-query]')
+        const mainQuery     = document.querySelector('[data-lz-modal] [data-lz-keyword]')
         const changeEvent = new CustomEvent('change');
         let i = 0;
         let j = 0;

@@ -29,7 +29,7 @@ export default class Modal {
 
     _setKeywordWidth() {
         const target  = this._el.querySelector('[data-lz-form]');
-        const keyword = this._el.querySelector('[data-lz-query]');
+        const keyword = this._el.querySelector('[data-lz-keyword]');
         const cross   = this._el.querySelector('[data-lz-x]');
         const btn     = this._el.querySelector('[data-lz-btn]');
 
