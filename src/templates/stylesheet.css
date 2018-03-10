@@ -130,7 +130,7 @@
 }
 
 .lz-body .lz-results {
-  min-height: 76vh;
+  min-height: 75.5vh;
 }
 
 .lz-body .lz-result {
@@ -177,14 +177,15 @@
 
 .lz-nav .lz-button {
   margin-top: 1em;
+  font-size: 13px;
+  font-family: arial, sans-serif;
+  width: 5.5em;
 }
 
 .lz-nav .lz-button a {
   display: none;
   padding: .5em .75em;
   color: #444;
-  font-family: arial, sans-serif;
-  font-size: 15px;
   border: 1px solid #999;
   border-radius: 5px;
   text-decoration: none;
