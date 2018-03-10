@@ -3,6 +3,7 @@ import Promise from 'promise-polyfill';
 import Search from './search';
 import Style from './templates/stylesheet.css';
 import Template from './template';
+import Throttle from 'throttleit';
 
 export default class LazySearch {
     constructor() {
@@ -79,6 +80,11 @@ export default class LazySearch {
             this.previousElementSibling.value = '';
             this.parentNode.classList.remove('has-keyword');
         });
+
+        // キーアップ時に入力内容が空であれば has-keyword クラスを削除
+        this._modal.el().querySelector('.lz-header .lz-keyword').addEventListener('keyup', Throttle(function (event) {
+            self._modal.setHasKeyword();
+        }, 250));
 
         // cancel でモーダルを閉じる
         this._modal.el().getElementsByClassName('lz-cancel')[0].addEventListener('click', function (event) {
