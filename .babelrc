@@ -1,0 +1,11 @@
+{
+  'presets': [
+    ['env', {
+      'targets': {
+        'browsers': ['last 3 versions', 'not ie <= 9']
+      },
+      'modules': false
+    }]
+  ],
+  'comments': false
+}
