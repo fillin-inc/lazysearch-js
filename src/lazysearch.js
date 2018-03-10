@@ -18,7 +18,7 @@ export default class LazySearch {
     }
 
     _readySearch() {
-        const self = this;
+        const self           = this;
         const btns           = document.querySelectorAll('[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button');
         const queries        = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
         const btnLength      = btns.length;
@@ -70,6 +70,24 @@ export default class LazySearch {
                 }
             });
         }
+
+        // x ボタンで検索キーワードを削除
+        this._modal.el().querySelector('.lz-header .lz-x').addEventListener('click', function (event) {
+            event.preventDefault();
+            this.previousElementSibling.value = '';
+        });
+
+        // cancel でモーダルを閉じる
+        this._modal.el().getElementsByClassName('lz-cancel')[0].addEventListener('click', function (event) {
+            event.preventDefault();
+            document.querySelector('[data-lz-modal]').classList.remove('is-active');
+        });
+
+        // 背景色クリックでモーダルを閉じる
+        document.getElementsByClassName('lz-background')[0].addEventListener('click', function (event) {
+            event.preventDefault();
+            document.querySelector('[data-lz-modal]').classList.remove('is-active');
+        });
     }
 
     _drawResult(res) {
