@@ -226,4 +226,8 @@
     top: 0;
     height: 100%;
   }
+
+  .lz-modal .lz-inner {
+    width: 100%;
+  }
 }
