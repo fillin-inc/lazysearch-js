@@ -1,4 +1,3 @@
-import CustomEvent from 'custom-event';
 import Modal from './modal';
 import Promise from 'promise-polyfill';
 import Search from './search';
@@ -17,11 +16,6 @@ export default class LazySearch {
         this._modal.append();
         this._setTargetElements();
         this._setSearchEvent();
-
-        const query = Search.getQuery();
-        if (query !== '') {
-            this._openModalWithQuery(query);
-        }
     }
 
     // 検索処理用のイベントを設定
@@ -56,8 +50,7 @@ export default class LazySearch {
                 self._search
                     .fetch(params)
                     .then(self._drawResult)
-                    .then(self._drawNavi)
-                    .then(self._history);
+                    .then(self._drawNavi);
                 if (!self._modal.isVisible()) {
                     self._modal.open();
                 }
@@ -69,12 +62,11 @@ export default class LazySearch {
             naviBtns[i].addEventListener('click', function (event) {
                 event.preventDefault();
                 let params = self._collectParams(document.querySelector('[data-lz]'));
-                params.page = this.parentNode.dataset.page;
+                params.page = parseInt(this.parentNode.dataset.page, 10);
                 self._search
                     .fetch(params)
                     .then(self._drawResult)
-                    .then(self._drawNavi)
-                    .then(self._history);
+                    .then(self._drawNavi);
                 if (!self._modal.isVisible()) {
                     self._modal.open();
                 }
@@ -189,19 +181,6 @@ export default class LazySearch {
         return info;
     }
 
-    // 検索処理 URL を History に反映
-    _history(params) {
-        if (!history.pushState) {
-            return;
-        }
-
-        let url = location.pathname + '?q=' + encodeURIComponent(params.keyword);
-        if (params.page > 1) {
-            url = location.pathname + '?q=' + encodeURIComponent(params.keyword) + '&page=' + params.page;
-        }
-        history.pushState(null, null, url);
-    }
-
     // 処理対象となるパラメータ名を設定
     _setTargetElements(formElm) {
         this._targets = [ 'page', 'format', 'keyword', 'per_page', 'uuid']
@@ -225,32 +204,10 @@ export default class LazySearch {
             elm = null;
         }
 
-        // 現在 URL と異なる検索の場合, page = 1 に修正
-        if (params.query !== Search.getQuery()) {
+        if (!params.page) {
             params.page = 1;
         }
         return params;
-    }
-
-    // URL の q= の値から検索を実行
-    _openModalWithQuery(query) {
-        const changeEvent = new CustomEvent('change');
-        const mainQuery   = document.querySelector('[data-lz-modal] [name=keyword]');
-
-        mainQuery.value = query;
-        mainQuery.dispatchEvent(changeEvent);
-
-        let params = this._collectParams(document.querySelector('[data-lz]'));
-        params.page = Search.getPageInQuery();
-        this._search
-            .fetch(params)
-            .then(this._drawResult)
-            .then(this._drawNavi)
-            .then(self._history);
-
-        if (!this._modal.isVisible()) {
-            this._modal.open();
-        }
     }
 
     // LazySearch 検索が設定されているか判定
