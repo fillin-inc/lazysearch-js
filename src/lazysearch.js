@@ -12,8 +12,7 @@ export default class LazySearch {
         Style.use();
 
         this._search   = new Search();
-        this._template = new Template();
-        this._modal    = new Modal(this._template.modal());
+        this._modal    = new Modal((new Template()).modal());
         this._modal.append();
         this._setTargetElements();
         this._readySearch();
@@ -58,6 +57,7 @@ export default class LazySearch {
         const wrapper = document.querySelector('[data-lz-modal] .lz-results');
         if (!res.ok) {
             wrapper.classList.add('has-error');
+
             const p = document.createElement('p');
             res.json().then((body) => {
                 let errors = [];
@@ -67,10 +67,27 @@ export default class LazySearch {
                 p.innerHTML = errors.join("\n<br>\n");
                 wrapper.appendChild(p);
             });
-            return;
-        }
+        } else {
+            wrapper.classList.remove('has-error');
 
-        wrapper.classList.remove('has-error');
+            let df   = document.createDocumentFragment();
+            res.json().then((body) => {
+                if (body.count === 0) {
+                    return res;
+                }
+
+                body.results.forEach(function (val, idx, ary) {
+                    let row = (new Template()).result();
+                    row.getElementsByTagName('a')[0].href = val.url;
+                    row.getElementsByTagName('h3')[0].innerHTML = val.title;
+                    row.getElementsByClassName('url')[0].innerHTML = val.url;
+                    row.getElementsByClassName('desc')[0].innerHTML = val.match;
+                    df.appendChild(row);
+                });
+                wrapper.appendChild(df);
+            });
+        }
+        return res;
     }
 
     _setTargetElements(formElm) {
