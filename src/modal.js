@@ -3,6 +3,10 @@ export default class Modal {
         this._el = el;
     }
 
+    el() {
+        return this._el;
+    }
+
     append() {
         const body = document.getElementsByTagName('body');
         if (body.length === 0) {

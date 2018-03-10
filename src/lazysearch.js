@@ -20,12 +20,14 @@ export default class LazySearch {
 
     _readySearch(modal) {
         const self = this;
-        const btns          = document.querySelectorAll('[data-lz-btn]');
-        const queries       = document.querySelectorAll('[data-lz-keyword]');
-        const btnLength     = btns.length;
-        const queriesLength = queries.length;
-        const mainQuery     = document.querySelector('[data-lz-modal] [data-lz-keyword]')
-        const changeEvent = new CustomEvent('change');
+        const btns           = document.querySelectorAll('[data-lz-btn]');
+        const queries        = document.querySelectorAll('[data-lz-keyword]');
+        const btnLength      = btns.length;
+        const queriesLength  = queries.length;
+        const mainQuery      = document.querySelector('[data-lz-modal] [data-lz-keyword]');
+        const naviBtns       = this._modal.el().querySelectorAll('.lz-button  a');
+        const naviBtnsLength = naviBtns.length;
+        const changeEvent    = new CustomEvent('change');
         let i = 0;
         let j = 0;
 
@@ -45,6 +47,22 @@ export default class LazySearch {
             btns[i].addEventListener('click', function (event) {
                 event.preventDefault();
                 let params = self._collectParams(document.querySelector('[data-lz]'));
+                self._search
+                    .fetch(params)
+                    .then(self._drawResult)
+                    .then(self._drawNavi)
+                if (!self._modal.isVisible()) {
+                    self._modal.open();
+                }
+            });
+        }
+
+        // 次へ, 前へボタン押下時に検索を実行
+        for (i = 0; i < naviBtnsLength; i += 1) {
+            naviBtns[i].addEventListener('click', function (event) {
+                event.preventDefault();
+                let params = self._collectParams(document.querySelector('[data-lz]'));
+                params.page = this.parentNode.dataset.page;
                 self._search
                     .fetch(params)
                     .then(self._drawResult)
@@ -74,9 +92,9 @@ export default class LazySearch {
 
                 return {
                     navigation:   false,
-                    current_page: body.current_page,
-                    per_page:     body.per_page,
-                    count:        body.count,
+                    page:         parseInt(body.current_page, 10),
+                    per_page:     parseInt(body.per_page, 10),
+                    count:        parseInt(body.count, 10),
                     has_next:     body.has_next
                 };
             });
@@ -108,9 +126,9 @@ export default class LazySearch {
 
                 return {
                     navigation:   showNavigation,
-                    current_page: body.current_page,
-                    per_page:     body.per_page,
-                    count:        body.count,
+                    page:         parseInt(body.current_page, 10),
+                    per_page:     parseInt(body.per_page, 10),
+                    count:        parseInt(body.count, 10),
                     has_next:     body.has_next
                 };
             });
@@ -119,26 +137,33 @@ export default class LazySearch {
 
     _drawNavi(info) {
         const navi = document.querySelector('[data-lz-modal] .lz-nav');
+        const nextBtn = navi.getElementsByClassName('lz-next')[0];
+        const prevBtn = navi.getElementsByClassName('lz-prev')[0];
+
         if (info.count) {
-            navi.getElementsByClassName('lz-total-num')[0].innerHTML = parseInt(info.count, 10);
+            navi.getElementsByClassName('lz-total-num')[0].innerHTML = info.count;
         }
 
-        if (info.current_page) {
-            const totalPage = Math.ceil(parseInt(info.count, 10) / parseInt(info.per_page, 10));
-            navi.getElementsByClassName('lz-current-page')[0].innerHTML = parseInt(info.current_page, 10);
+        if (info.page) {
+            const totalPage = Math.ceil(info.count / info.per_page);
+            navi.getElementsByClassName('lz-current-page')[0].innerHTML = info.page;
             navi.getElementsByClassName('lz-total-page')[0].innerHTML = totalPage;
         }
 
         if (info.has_next) {
-            navi.getElementsByClassName('lz-next')[0].classList.add('is-active');
+            nextBtn.classList.add('is-active');
+            nextBtn.dataset.page = info.page + 1;
         } else {
-            navi.getElementsByClassName('lz-next')[0].classList.remove('is-active');
+            nextBtn.classList.remove('is-active');
+            nextBtn.dataset.page = 1;
         }
 
-        if (info.current_page > 1) {
-            navi.getElementsByClassName('lz-prev')[0].classList.add('is-active');
+        if (info.page > 1) {
+            prevBtn.classList.add('is-active');
+            prevBtn.dataset.page = info.page - 1;
         } else {
-            navi.getElementsByClassName('lz-prev')[0].classList.remove('is-active');
+            prevBtn.classList.remove('is-active');
+            prevBtn.dataset.page = info.page - 0;
         }
 
         if (info.navigation) {
@@ -150,7 +175,7 @@ export default class LazySearch {
 
     _setTargetElements(formElm) {
         this._targets = {
-            current_page: 'data-lz-current-page',
+            page:         'data-lz-page',
             format:       'data-lz-format',
             keyword:      'data-lz-keyword',
             per_page:     'data-lz-per-page',
@@ -170,7 +195,7 @@ export default class LazySearch {
         for (let key in this._targets) {
             elm = formElm.querySelector('[' + this._targets[key] + ']');
             if (elm !== null) {
-                params[key] = elm.value;
+                params[key] = (key.includes('page')) ? parseInt(elm.value, 10) : elm.value;
             }
             elm = null;
         }

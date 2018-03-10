@@ -2,11 +2,11 @@ export default class Search {
     constructor(params = null, endpoint = null) {
         this.endpoint = 'https://api.lazysear.ch/search';
         this.params = {
-            current_page:1,
-            format: 'json',
-            keyword: null,
+            page:     1,
+            format:   'json',
+            keyword:  null,
             per_page: 10,
-            uuid: null
+            uuid:     null
         };
 
         this._updateParams(params);
