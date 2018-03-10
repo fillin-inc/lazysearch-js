@@ -20,7 +20,7 @@ export default class Modal {
     // モーダルを開く
     open() {
         this._el.classList.add('is-active');
-        this._setKeywordWidth();
+        this.setKeywordWidth();
         this.setHasKeyword();
     }
 
@@ -37,7 +37,7 @@ export default class Modal {
     }
 
     // キーワード入力欄の表示調整
-    _setKeywordWidth() {
+    setKeywordWidth() {
         const target     = this._el.getElementsByTagName('form')[0];
         const keyword    = this._el.getElementsByClassName('lz-keyword')[0];
         const btn        = this._el.getElementsByClassName('lz-button')[0];

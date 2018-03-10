@@ -97,6 +97,10 @@ export default class LazySearch {
             event.preventDefault();
             document.querySelector('[data-lz-modal]').classList.remove('is-active');
         });
+
+        window.onresize = Throttle(function () {
+            self._modal.setKeywordWidth();
+        }, 300);
     }
 
     // 検索結果の描画
