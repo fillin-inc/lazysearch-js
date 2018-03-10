@@ -1,3 +1,6 @@
+import Promise from 'promise-polyfill';
+import 'whatwg-fetch';
+
 export default class Search {
     constructor(params = null, endpoint = null) {
         this.endpoint = 'https://api.lazysear.ch/search';
