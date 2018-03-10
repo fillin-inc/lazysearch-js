@@ -33,17 +33,17 @@ export default class Modal {
     }
 
     _setKeywordWidth() {
-        const target     = this._el.querySelector('[data-lz-form]');
-        const keyword    = this._el.querySelector('[data-lz-keyword]');
-        const btn        = this._el.querySelector('[data-lz-btn]');
+        const target     = this._el.getElementsByTagName('form')[0];
+        const keyword    = this._el.getElementsByClassName('lz-keyword')[0];
+        const btn        = this._el.getElementsByClassName('lz-button')[0];
         const crossWidth = 20;
 
         keyword.style.width = (target.clientWidth - (crossWidth + btn.clientWidth + 65)).toString() + 'px';
     }
 
     _setHasKeyword() {
-        const searchForm = this._el.getElementsByClassName('lz-search-form')[0];
-        const searchKeyword = this._el.querySelector('[data-lz-keyword]');
+        const searchForm    = this._el.getElementsByClassName('lz-search-form')[0];
+        const searchKeyword = this._el.getElementsByClassName('lz-keyword')[0];
         if (searchKeyword.value !== '') {
             searchForm.classList.add('has-keyword');
         } else {

@@ -1,4 +1,3 @@
-import CustomEvent from 'custom-event';
 import Modal from './modal';
 import Search from './search';
 import Style from './templates/stylesheet.css';
@@ -18,16 +17,15 @@ export default class LazySearch {
         this._readySearch();
     }
 
-    _readySearch(modal) {
+    _readySearch() {
         const self = this;
-        const btns           = document.querySelectorAll('[data-lz-btn]');
-        const queries        = document.querySelectorAll('[data-lz-keyword]');
+        const btns           = document.querySelectorAll('[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button');
+        const queries        = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
         const btnLength      = btns.length;
         const queriesLength  = queries.length;
-        const mainQuery      = document.querySelector('[data-lz-modal] [data-lz-keyword]');
-        const naviBtns       = this._modal.el().querySelectorAll('.lz-button  a');
+        const mainQuery      = document.querySelector('[data-lz-modal] [name=keyword]');
+        const naviBtns       = this._modal.el().querySelectorAll('.lz-button a');
         const naviBtnsLength = naviBtns.length;
-        const changeEvent    = new CustomEvent('change');
         let i = 0;
         let j = 0;
 
@@ -175,16 +173,11 @@ export default class LazySearch {
     }
 
     _setTargetElements(formElm) {
-        this._targets = {
-            page:         'data-lz-page',
-            format:       'data-lz-format',
-            keyword:      'data-lz-keyword',
-            per_page:     'data-lz-per-page',
-            uuid:         'data-lz-uuid'
-        }
+        this._targets = [ 'page', 'format', 'keyword', 'per_page', 'uuid']
     }
 
     _collectParams(formElm) {
+        const targetLength = this._targets.length;
         let params = {};
         let elm = null;
 
@@ -192,11 +185,10 @@ export default class LazySearch {
             return params;
         }
 
-        window.formElm = formElm;
-        for (let key in this._targets) {
-            elm = formElm.querySelector('[' + this._targets[key] + ']');
+        for (let i = 0; i < targetLength; i += 1) {
+            elm = formElm.querySelector('[name=' + this._targets[i] + ']');
             if (elm !== null) {
-                params[key] = (key.includes('page')) ? parseInt(elm.value, 10) : elm.value;
+                params[this._targets[i]] = (this._targets[i].includes('page')) ? parseInt(elm.value, 10) : elm.value;
             }
             elm = null;
         }
