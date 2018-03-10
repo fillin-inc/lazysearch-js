@@ -77,6 +77,7 @@ export default class LazySearch {
         this._modal.el().querySelector('.lz-header .lz-x').addEventListener('click', function (event) {
             event.preventDefault();
             this.previousElementSibling.value = '';
+            this.parentNode.classList.remove('has-keyword');
         });
 
         // cancel でモーダルを閉じる

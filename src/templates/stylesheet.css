@@ -92,6 +92,11 @@
   position: relative;
 }
 
+.lz-search-form > .lz-keyword:focus,
+.lz-search-form > .lz-x:focus {
+  outline: 0;
+}
+
 .lz-search-form > .lz-x {
   display: none;
   position: relative;

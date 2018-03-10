@@ -21,7 +21,7 @@ export default class Modal {
     open() {
         this._el.classList.add('is-active');
         this._setKeywordWidth();
-        this._setHasKeyword();
+        this.setHasKeyword();
     }
 
     // モーダルを閉じる
@@ -47,7 +47,7 @@ export default class Modal {
     }
 
     // キーワード有無によるクラス付与処理
-    _setHasKeyword() {
+    setHasKeyword() {
         const searchForm    = this._el.getElementsByClassName('lz-search-form')[0];
         const searchKeyword = this._el.getElementsByClassName('lz-keyword')[0];
         if (searchKeyword.value !== '') {
