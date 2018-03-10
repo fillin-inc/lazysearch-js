@@ -85,6 +85,7 @@ export default class LazySearch {
 
             let df = document.createDocumentFragment();
             return res.json().then((body) => {
+                let showNavigation = true;
                 if (body.count > 0) {
                     body.results.forEach(function (val, idx, ary) {
                         let row = (new Template()).result();
@@ -100,12 +101,13 @@ export default class LazySearch {
                     const p = document.createElement('p');
                     p.classList.add('lz-result');
                     p.innerHTML = '該当するページが見つかりませんでした。';
+                    showNavigation = false;
                     wrapper.innerHTML = '';
                     wrapper.appendChild(p);
                 }
 
                 return {
-                    navigation:   true,
+                    navigation:   showNavigation,
                     current_page: body.current_page,
                     per_page:     body.per_page,
                     count:        body.count,
