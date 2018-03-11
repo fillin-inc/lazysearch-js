@@ -25,6 +25,7 @@ export default class Modal {
         this._el.classList.add('is-active');
         this.setKeywordWidth();
         this.setHasKeyword();
+        this.setLzBodyHeight();
     }
 
     // モーダルを閉じる
@@ -60,6 +61,13 @@ export default class Modal {
         }
     }
 
+    // lz-body の高さ調整
+    setLzBodyHeight() {
+        const inner = this._el.getElementsByClassName('lz-inner')[0];
+        const body  = this._el.getElementsByClassName('lz-body')[0];
+        body.style.height = (inner.clientHeight - 85) + 'px';
+    }
+
     // イベントを設定
     _setEvent() {
         const self = this;
@@ -79,11 +87,17 @@ export default class Modal {
         // cancel でモーダルを閉じる
         this._el.getElementsByClassName('lz-close')[0].addEventListener('click', function (event) {
             event.preventDefault();
-            document.querySelector('[data-lz-modal]').classList.remove('is-active');
+            const modal = document.querySelector('[data-lz-modal]')
+            modal.classList.add('is-fadeout');
+            modal.classList.remove('is-active');
+            setTimeout(function () {
+                document.querySelector('[data-lz-modal]').classList.remove('is-fadeout');
+            }, 200);
         });
 
         window.onresize = Throttle(function () {
             self.setKeywordWidth();
+            self.setLzBodyHeight();
         }, 250);
     }
 }
