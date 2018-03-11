@@ -133,6 +133,7 @@
   padding-left: 25px;
   padding-right: 25px;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: auto;
   border-bottom: 1px solid rgba(60, 60, 60, .15);
 }
 
@@ -239,17 +240,32 @@
   }
 }
 
-@keyframes fadeIn {
+@keyframes lzFadeIn {
   0% { opacity: 0 }
   100% { opacity: 100% }
 }
 
-@-webkit-keyframes fadeIn {
+@-webkit-keyframes lzFadeIn {
   0% { opacity: 0 }
   100% { opacity: 100% }
 }
 
 .lz-modal.is-active {
-  animation: fadeIn .2s ease 0s 1 normal;
-  -webkit-animation: fadeIn .2s eqse 0s 1 normal;
+  animation: lzFadeIn .2s ease 0s 1 normal;
+  -webkit-animation: lzFadeIn .2s ease 0s 1 normal;
+}
+
+@keyframes lzFadeOut {
+  0% { opacity: 100% }
+  100% { opacity: 0 }
+}
+
+@-webkit-keyframes lzFadeOut {
+  0% { opacity: 100% }
+  100% { opacity: 0 }
+}
+
+.lz-moda.is-fadeout {
+  animation: lzFadeOut .2s ease 0s 1 normal;
+  -webkit-animation: lzFadeOut .2s ease 0s 1 normal;
 }
