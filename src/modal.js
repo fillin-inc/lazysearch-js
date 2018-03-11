@@ -26,13 +26,21 @@ export default class Modal {
         this.setKeywordWidth();
         this.setHasKeyword();
         this.setLzBodyHeight();
+        document.getElementsByTagName('body')[0].classList.add('lz-overflow-hidden');
     }
 
     // モーダルを閉じる
     close() {
-        if (this._el.classList.contains('is-active')) {
-            this._el.classList.remove('is-active');
+        if (!this.isVisible()) {
+            return;
         }
+
+        this._el.classList.add('is-fadeout');
+        this._el.classList.remove('is-active');
+        setTimeout(function () {
+            document.querySelector('[data-lz-modal]').classList.remove('is-fadeout');
+        }, 200);
+        document.getElementsByTagName('body')[0].classList.remove('lz-overflow-hidden');
     }
 
     // モーダルが表示されているかチェック
@@ -87,12 +95,7 @@ export default class Modal {
         // cancel でモーダルを閉じる
         this._el.getElementsByClassName('lz-close')[0].addEventListener('click', function (event) {
             event.preventDefault();
-            const modal = document.querySelector('[data-lz-modal]')
-            modal.classList.add('is-fadeout');
-            modal.classList.remove('is-active');
-            setTimeout(function () {
-                document.querySelector('[data-lz-modal]').classList.remove('is-fadeout');
-            }, 200);
+            self.close();
         });
 
         window.onresize = Throttle(function () {
