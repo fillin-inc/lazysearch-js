@@ -1,5 +1,9 @@
-// lz.js v0.1.0
 import LazySearch from './LazySearch';
+import Promise from 'promise-polyfill';
+
+if (!window.Promise) {
+    window.Promise = Promise;
+}
 
 window.onload = function () {
     new LazySearch();

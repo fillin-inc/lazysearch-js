@@ -1,5 +1,4 @@
 import Modal from './modal';
-import Promise from 'promise-polyfill';
 import Search from './search';
 import Style from './templates/stylesheet.css';
 import Template from './template';
