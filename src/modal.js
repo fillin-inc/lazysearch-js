@@ -55,7 +55,7 @@ export default class Modal {
         const btn        = this._el.getElementsByClassName('lz-button')[0];
         const crossWidth = 20;
 
-        keyword.style.width = (target.clientWidth - (crossWidth + btn.clientWidth + 65)).toString() + 'px';
+        keyword.style.width = (target.clientWidth - (crossWidth + btn.clientWidth + 73)).toString() + 'px';
     }
 
     // キーワード有無によるクラス付与処理
