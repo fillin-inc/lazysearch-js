@@ -201,7 +201,7 @@ export default class LazySearch {
         for (let i = 0; i < targetLength; i += 1) {
             elm = formElm.querySelector('[name=' + this._targets[i] + ']');
             if (elm !== null) {
-                params[this._targets[i]] = (this._targets[i].includes('page')) ? parseInt(elm.value, 10) : elm.value;
+                params[this._targets[i]] = (this._targets[i].indexOf('page') !== -1) ? parseInt(elm.value, 10) : elm.value;
             }
             elm = null;
         }
