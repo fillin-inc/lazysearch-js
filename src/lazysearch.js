@@ -1,3 +1,4 @@
+import escapeHtml from 'escape-html';
 import Modal from './modal';
 import Search from './search';
 import Style from './templates/stylesheet.css';
@@ -86,7 +87,7 @@ export default class LazySearch {
             return res.json().then((body) => {
                 let errors = [];
                 body.errors.forEach(function (val, idx, ary) {
-                    errors.push(val.message + '(' + val.error_id + ')');
+                    errors.push(escapeHtml(val.message + '(' + val.error_id + ')'));
                 });
                 p.classList.add('lz-result');
                 p.innerHTML = errors.join("\n<br>\n");
@@ -112,8 +113,8 @@ export default class LazySearch {
                     body.results.forEach(function (val, idx, ary) {
                         let row = (new Template()).result();
                         row.getElementsByTagName('a')[0].href = val.url;
-                        row.getElementsByTagName('h3')[0].innerHTML = val.title;
-                        row.getElementsByClassName('url')[0].innerHTML = val.url;
+                        row.getElementsByTagName('h3')[0].innerHTML = escapeHtml(val.title);
+                        row.getElementsByClassName('url')[0].innerHTML = escapeHtml(val.url);
                         row.getElementsByClassName('desc')[0].innerHTML = val.match;
                         df.appendChild(row);
                     });
@@ -122,7 +123,7 @@ export default class LazySearch {
                 } else {
                     const p = document.createElement('p');
                     p.classList.add('lz-result');
-                    p.innerHTML = '該当するページが見つかりませんでした。';
+                    p.innerHTML = escapeHtml('該当するページが見つかりませんでした。');
                     showNavigation = false;
                     wrapper.innerHTML = '';
                     wrapper.appendChild(p);
