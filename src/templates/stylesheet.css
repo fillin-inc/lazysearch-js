@@ -280,3 +280,12 @@ body.lz-overflow-hidden {
   animation: lzFadeOut .2s ease 0s 1 normal;
   -webkit-animation: lzFadeOut .2s ease 0s 1 normal;
 }
+
+/**
+ * for ie
+ */
+@media  all and (-ms-high-contrast:none) {
+  .lz-modal {
+    justify-content: flex-start;
+  }
+}
