@@ -97,7 +97,8 @@
 }
 
 .lz-search-form > .lz-keyword:focus,
-.lz-search-form > .lz-x:focus {
+.lz-search-form > .lz-x:focus,
+.lz-search-form > .lz-button {
   border: none;
   outline: 0;
 }
