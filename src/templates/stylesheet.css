@@ -91,24 +91,22 @@
 
 .lz-search-form > .lz-keyword {
   font-size: 16px;
-  height: 28px;
+  height: 30px;
   margin-left: 5px;
   position: relative;
 }
 
 .lz-search-form > .lz-keyword:focus,
-.lz-search-form > .lz-x:focus {
+.lz-search-form > .lz-x:focus,
+.lz-search-form > .lz-button {
   border: none;
   outline: 0;
 }
 
 .lz-search-form > .lz-x {
   display: none;
-  position: relative;
-  top: 1px;
-  left: 2px;
   width: 24px;
-  height: 28px;
+  height: 30px;
   line-height: 1;
 
   font-size: 20px;

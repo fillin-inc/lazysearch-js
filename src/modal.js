@@ -50,12 +50,18 @@ export default class Modal {
 
     // キーワード入力欄の表示調整
     setKeywordWidth() {
-        const target     = this._el.getElementsByTagName('form')[0];
-        const keyword    = this._el.getElementsByClassName('lz-keyword')[0];
-        const btn        = this._el.getElementsByClassName('lz-button')[0];
-        const crossWidth = 20;
+        const keyword = this._el.getElementsByClassName('lz-keyword')[0];
 
-        keyword.style.width = (target.clientWidth - (crossWidth + btn.clientWidth + 90)).toString() + 'px';
+        // 全体
+        const searchForm = this._el.getElementsByClassName('lz-search-form')[0];
+        // x ボタンサイズ
+        const crossWidth = 24;
+        // 検索ボタンサイズ
+        const btnWidth   = 44;
+        // margin-right + border 1px * 2
+        const margin     = 7;
+
+        keyword.style.width = (searchForm.clientWidth - (crossWidth + btnWidth + margin)).toString() + 'px';
     }
 
     // キーワード有無によるクラス付与処理

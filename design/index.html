@@ -164,11 +164,13 @@
 
         function setKeywordWidth() {
             var target   = document.getElementsByClassName('lz-search-form')[0];
-            var keyInput = target.getElementsByClassName('lz-keyword')[0];
-            var cross    = target.getElementsByClassName('lz-x')[0];
-            var btn      = target.getElementsByClassName('lz-button')[0];
 
-            keyInput.style.width = (target.clientWidth - (cross.clientWidth + btn.clientWidth + 12)).toString() + 'px';
+            var keyInput = target.getElementsByClassName('lz-keyword')[0];
+            var cross    = 24;
+            var btn      = 44;
+            var margin   = 8;
+
+            keyInput.style.width = (target.clientWidth - (cross + btn + margin)).toString() + 'px';
         }
     </script>
   </body>
