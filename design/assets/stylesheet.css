@@ -37,7 +37,7 @@ html, body {
 .lz-modal {
   display: none;
   position: relative;
-  z-index: 200;
+  z-index: 500;
 
   flex-direction: row;
   align-items: center;
