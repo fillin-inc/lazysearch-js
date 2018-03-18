@@ -1,6 +1,6 @@
 {
   "name": "lazysearch-js",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "JavaScript Library for LazySearch",
   "main": "src/lz.js",
   "scripts": {
