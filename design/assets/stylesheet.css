@@ -37,7 +37,7 @@ html, body {
 .lz-modal {
   display: none;
   position: relative;
-  z-index: 500;
+  z-index: 200;
 
   flex-direction: row;
   align-items: center;
@@ -102,7 +102,7 @@ html, body {
 
 .lz-search-form > .lz-keyword {
   font-size: 16px;
-  height: 28px;
+  height: 30px;
   margin-left: 5px;
   position: relative;
 }
@@ -115,11 +115,8 @@ html, body {
 
 .lz-search-form > .lz-x {
   display: none;
-  position: relative;
-  top: 1px;
-  left: 2px;
   width: 24px;
-  height: 28px;
+  height: 30px;
   line-height: 1;
 
   font-size: 20px;
@@ -149,6 +146,7 @@ html, body {
   padding-left: 25px;
   padding-right: 25px;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   border-bottom: 1px solid rgba(60, 60, 60, .15);
 }
 
@@ -244,6 +242,17 @@ html, body {
   display: inline;
 }
 
+/*
+ * iOS Scroll support
+ */
+html.lz-overflow-hidden,
+body.lz-overflow-hidden {
+  overflow: hidden;
+}
+
+/*
+ * animation
+ */
 @media screen and (max-width: 800px) {
   .lz-modal .lz-inner {
     top: 0;
@@ -255,17 +264,41 @@ html, body {
   }
 }
 
-@keyframes fadeIn {
+@keyframes lzFadeIn {
   0% { opacity: 0 }
   100% { opacity: 100% }
 }
 
-@-webkit-keyframes fadeIn {
+@-webkit-keyframes lzFadeIn {
   0% { opacity: 0 }
   100% { opacity: 100% }
 }
 
 .lz-modal.is-active {
-  animation: fadeIn .2s ease 0s 1 normal;
-  -webkit-animation: fadeIn .2s eqse 0s 1 normal;
+  animation: lzFadeIn .2s ease 0s 1 normal;
+  -webkit-animation: lzFadeIn .2s ease 0s 1 normal;
+}
+
+@keyframes lzFadeOut {
+  0% { opacity: 100% }
+  100% { opacity: 0 }
+}
+
+@-webkit-keyframes lzFadeOut {
+  0% { opacity: 100% }
+  100% { opacity: 0 }
+}
+
+.lz-moda.is-fadeout {
+  animation: lzFadeOut .2s ease 0s 1 normal;
+  -webkit-animation: lzFadeOut .2s ease 0s 1 normal;
+}
+
+/**
+ * for ie
+ */
+@media  all and (-ms-high-contrast:none) {
+  .lz-modal {
+    justify-content: flex-start;
+  }
 }
