@@ -3,14 +3,17 @@ import 'whatwg-fetch';
 export default class Search {
     constructor(params = null, endpoint = null) {
         this.endpoint = 'https://api.lazysear.ch/search';
-        this.params = {
-            page:     1,
-            format:   'json',
-            keyword:  null,
-            per_page: 10,
-            uuid:     null
-        };
+        this.allowedParams = [
+            'uuid',
+            'keyword',
+            'format',
+            'page',
+            'per_page',
+            'match_count',
+            'match_length'
+        ];
 
+        this._initParams();
         this._updateParams(params);
         if (endpoint !== null) {
             this.endpoint = endpoint;
@@ -32,12 +35,21 @@ export default class Search {
             .join('&');
     }
 
+    _initParams() {
+        this.params = {
+            keyword:  null,
+            uuid:     null
+        };
+    }
+
     _updateParams(params) {
-        if (params && Object.keys(params).length > 0) {
-            for (let key in this.params) {
-                if (params[key]) {
-                    this.params[key] = params[key];
-                }
+        if (!params || Object.keys(params).length === 0) {
+            return;
+        }
+
+        for (let key in params) {
+            if (this.allowedParams.indexOf(key) >= 0) {
+                this.params[key] = params[key];
             }
         }
     }

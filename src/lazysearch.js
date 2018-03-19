@@ -185,7 +185,7 @@ export default class LazySearch {
 
     // 処理対象となるパラメータ名を設定
     _setTargetElements(formElm) {
-        this._targets = [ 'page', 'format', 'keyword', 'per_page', 'uuid']
+        this._targets = [ 'page', 'format', 'keyword', 'per_page', 'uuid', "match_count", "match_length" ];
     }
 
     // form からパラメータ収集
