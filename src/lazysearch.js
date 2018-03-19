@@ -62,6 +62,7 @@ export default class LazySearch {
                 if (!self._modal.isVisible()) {
                     self._modal.open();
                 }
+                self._modal.focusOnKeyword();
             });
         }
 
@@ -85,6 +86,7 @@ export default class LazySearch {
                 if (!self._modal.isVisible()) {
                     self._modal.open();
                 }
+                self._modal.focusOnKeyword();
             });
         }
 
