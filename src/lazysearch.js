@@ -1,5 +1,5 @@
-import escapeHtml from 'escape-html';
 import Modal from './modal';
+import Painter from './painter';
 import Search from './search';
 import Style from './templates/stylesheet.css';
 import Template from './template';
@@ -81,19 +81,8 @@ export default class LazySearch {
     _drawResult(res) {
         const wrapper = document.querySelector('[data-lz-modal] .lz-results');
         if (!res.ok) {
-            wrapper.classList.add('has-error');
-
-            const p = document.createElement('p');
             return res.json().then((body) => {
-                let errors = [];
-                body.errors.forEach(function (val, idx, ary) {
-                    errors.push(escapeHtml(val.message + '(' + val.error_id + ')'));
-                });
-                p.classList.add('lz-result');
-                p.innerHTML = errors.join("\n<br>\n");
-                wrapper.innerHTML = '';
-                wrapper.appendChild(p);
-
+                Painter.error(wrapper, body);
                 return {
                     navigation:   false,
                     page:         parseInt(body.current_page, 10),
@@ -104,29 +93,13 @@ export default class LazySearch {
                 };
             });
         } else {
-            wrapper.classList.remove('has-error');
-
-            let df = document.createDocumentFragment();
             return res.json().then((body) => {
                 let showNavigation = true;
                 if (body.count > 0) {
-                    body.results.forEach(function (val, idx, ary) {
-                        let row = (new Template()).result();
-                        row.getElementsByTagName('a')[0].href = val.url;
-                        row.getElementsByTagName('h3')[0].innerHTML = escapeHtml(val.title);
-                        row.getElementsByClassName('url')[0].innerHTML = escapeHtml(val.url);
-                        row.getElementsByClassName('desc')[0].innerHTML = val.match;
-                        df.appendChild(row);
-                    });
-                    wrapper.innerHTML = '';
-                    wrapper.appendChild(df);
+                    Painter.result(wrapper, body);
                 } else {
-                    const p = document.createElement('p');
-                    p.classList.add('lz-result');
-                    p.innerHTML = escapeHtml('該当するページが見つかりませんでした。');
                     showNavigation = false;
-                    wrapper.innerHTML = '';
-                    wrapper.appendChild(p);
+                    Painter.empty(wrapper);
                 }
 
                 document.querySelector('[data-lz-modal] .lz-body').scrollTop = 0;
