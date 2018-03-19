@@ -28,6 +28,7 @@ export default class LazySearch {
         const mainQuery      = document.querySelector('[data-lz-modal] [name=keyword]');
         const naviBtns       = this._modal.el().querySelectorAll('.lz-button a');
         const naviBtnsLength = naviBtns.length;
+        const modalNavi      = document.querySelector('[data-lz-modal] .lz-nav');
         let i = 0;
         let j = 0;
 
@@ -49,7 +50,7 @@ export default class LazySearch {
                 let params = self._collectParams(document.querySelector('[data-lz]'));
                 if (params.keyword === null || params.keyword === '') {
                     Painter.noKeyword(document.querySelector('[data-lz-modal] .lz-results'));
-                    document.querySelector('[data-lz-modal] .lz-nav').classList.remove('is-active');
+                    modalNavi.classList.remove('is-active');
                     return;
                 }
 
@@ -72,7 +73,7 @@ export default class LazySearch {
                 params.page = parseInt(this.parentNode.dataset.page, 10);
                 if (params.keyword === null || params.keyword === '') {
                     Painter.noKeyword(document.querySelector('[data-lz-modal] .lz-results'));
-                    document.querySelector('[data-lz-modal] .lz-nav').classList.remove('is-active');
+                    modalNavi.classList.remove('is-active');
                     return;
                 }
 
