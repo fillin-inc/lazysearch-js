@@ -48,6 +48,11 @@ export default class Modal {
         return !(this._el.offsetWidth === 0 && this._el.offsetHeight === 0);
     }
 
+    // キーワードに focus
+    focusOnKeyword() {
+        this._el.getElementsByClassName('lz-keyword')[0].focus();
+    }
+
     // キーワード入力欄の表示調整
     setKeywordWidth() {
         const keyword = this._el.getElementsByClassName('lz-keyword')[0];
