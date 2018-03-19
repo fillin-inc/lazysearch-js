@@ -28,6 +28,16 @@ export default class Painter {
         targetElm.appendChild(p);
     }
 
+    static noKeyword(targetElm) {
+        targetElm.classList.remove('has-error');
+
+        const p = document.createElement('p');
+        p.classList.add('la-result');
+        p.innerHTML = escapeHtml('サイト内検索にはキーワードの指定が必要です。');
+        targetElm.innerHTML = '';
+        targetElm.appendChild(p);
+    }
+
     static error(targetElm, resBody) {
         targetElm.classList.add('has-error');
 

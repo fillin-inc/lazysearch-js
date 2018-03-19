@@ -47,6 +47,12 @@ export default class LazySearch {
             btns[i].addEventListener('click', function (event) {
                 event.preventDefault();
                 let params = self._collectParams(document.querySelector('[data-lz]'));
+                if (params.keyword === null || params.keyword === '') {
+                    Painter.noKeyword(document.querySelector('[data-lz-modal] .lz-results'));
+                    document.querySelector('[data-lz-modal] .lz-nav').classList.remove('is-active');
+                    return;
+                }
+
                 self._search
                     .fetch(params)
                     .then(self._drawResult)
@@ -64,6 +70,12 @@ export default class LazySearch {
                 event.preventDefault();
                 let params = self._collectParams(document.querySelector('[data-lz]'));
                 params.page = parseInt(this.parentNode.dataset.page, 10);
+                if (params.keyword === null || params.keyword === '') {
+                    Painter.noKeyword(document.querySelector('[data-lz-modal] .lz-results'));
+                    document.querySelector('[data-lz-modal] .lz-nav').classList.remove('is-active');
+                    return;
+                }
+
                 self._search
                     .fetch(params)
                     .then(self._drawResult)
