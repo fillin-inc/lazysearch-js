@@ -45,7 +45,7 @@ export default class Modal {
 
     // モーダルが表示されているかチェック
     isVisible() {
-        return (this._el.classList.value.indexOf('is-active') >= 0);
+        return (this._el.className.indexOf('is-active') >= 0);
     }
 
     // キーワード入力欄の表示調整
