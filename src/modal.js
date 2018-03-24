@@ -45,7 +45,7 @@ export default class Modal {
 
     // モーダルが表示されているかチェック
     isVisible() {
-        return !(this._el.offsetWidth === 0 && this._el.offsetHeight === 0);
+        return (this._el.classList.value.indexOf('is-active') >= 0);
     }
 
     // キーワード入力欄の表示調整
@@ -77,9 +77,11 @@ export default class Modal {
 
     // lz-body の高さ調整
     setLzBodyHeight() {
-        const inner = this._el.getElementsByClassName('lz-inner')[0];
+        const front = this._el.getElementsByClassName('lz-front')[0];
         const body  = this._el.getElementsByClassName('lz-body')[0];
-        body.style.height = (inner.clientHeight - 85) + 'px';
+        const adjustment = (document.body.clientWidth >= 800) ? 115 : 85;
+
+        body.style.height = (front.clientHeight - adjustment) + 'px';
     }
 
     // イベントを設定
@@ -107,6 +109,6 @@ export default class Modal {
         window.onresize = Throttle(function () {
             self.setKeywordWidth();
             self.setLzBodyHeight();
-        }, 250);
+        }, 150);
     }
 }

@@ -42,12 +42,23 @@
   background: rgba(30, 30, 30, .42);
 }
 
-.lz-modal .lz-inner {
-  height: 96%;
-  width: 60%;
+.lz-modal .lz-front {
+  height: 100%;
+  width: 100%;
 
   position: fixed;
   top: 10px;
+  left: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.lz-modal .lz-search-block {
+  height: 96%;
+  width: 60%;
+  min-width: 800px;
 
   border-radius: 7px;
   background: #fff;
@@ -139,10 +150,6 @@
   border-bottom: 1px solid rgba(60, 60, 60, .15);
 }
 
-.lz-body .lz-results {
-  min-height: 75.5vh;
-}
-
 .lz-body .lz-result {
   margin-top: 1.39em;
   font-size: 13px;
@@ -161,6 +168,8 @@
 }
 
 .lz-body .lz-result .url {
+  display: inline-block;
+  width: 100%;
   color: #20C133;
   margin: 0;
   white-space: nowrap;
@@ -219,7 +228,11 @@
   padding-left: .5em;
 }
 
-.lz-modal.is-active, .lz-nav.is-active {
+.lz-modal.is-active {
+  display: block;
+}
+
+.lz-nav.is-active {
   display: flex;
 }
 
@@ -239,20 +252,23 @@ body.lz-overflow-hidden {
   overflow: hidden;
 }
 
-/*
- * animation
- */
 @media screen and (max-width: 800px) {
-  .lz-modal .lz-inner {
+  .lz-modal .lz-front {
     top: 0;
+    left: 0;
     height: 100%;
   }
 
-  .lz-modal .lz-inner {
+  .lz-modal .lz-search-block {
     width: 100%;
+    min-width: 100%;
+    height: 100%;
   }
 }
 
+/*
+ * animation
+ */
 @keyframes lzFadeIn {
   0% { opacity: 0 }
   100% { opacity: 100% }
@@ -281,13 +297,4 @@ body.lz-overflow-hidden {
 .lz-moda.is-fadeout {
   animation: lzFadeOut .2s ease 0s 1 normal;
   -webkit-animation: lzFadeOut .2s ease 0s 1 normal;
-}
-
-/**
- * for ie
- */
-@media  all and (-ms-high-contrast:none) {
-  .lz-modal {
-    justify-content: flex-start;
-  }
 }
