@@ -6,7 +6,13 @@
   "scripts": {
     "build": "webpack --mode production --bail",
     "watch": "webpack --mode development -d --watch",
-    "clear": "rm -r dist/* && touch dist/.gitkeep"
+    "clear": "rm -r dist/* && touch dist/.gitkeep",
+    "test": "jest"
+  },
+  "test": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "repository": {
     "type": "git",
@@ -23,12 +29,15 @@
   "homepage": "https://lazysear.ch/",
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.10",
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",
     "html-loader": "^0.5.5",
+    "jest": "^22.4.3",
     "style-loader": "^0.20.3",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.11"
