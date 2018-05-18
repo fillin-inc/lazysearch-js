@@ -120,8 +120,9 @@ export default class Modal {
     // x ボタンで検索キーワードを削除
     this._el.querySelector('.lz-header .lz-x').addEventListener('click', function(event) {
       event.preventDefault();
-      this.previousElementSibling.value = '';
-      this.parentNode.classList.remove('has-keyword');
+      const target = event.currentTarget || event.srcElement;
+      target.previousElementSibling.value = '';
+      target.parentNode.classList.remove('has-keyword');
     });
 
     // キーアップ時に入力内容が空であれば has-keyword クラスを削除

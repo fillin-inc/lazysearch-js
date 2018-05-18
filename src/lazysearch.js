@@ -83,8 +83,10 @@ export default class LazySearch {
     for (i = 0; i < naviBtnsLength; i += 1) {
       naviBtns[i].addEventListener('click', function(event) {
         event.preventDefault();
+        const target = event.currentTarget || event.srcElement;
+
         let params = self._collectParams(document.querySelector('[data-lz]'));
-        params.page = parseInt(this.parentNode.dataset.page, 10);
+        params.page = parseInt(target.parentNode.dataset.page, 10);
         if (params.keyword === null || params.keyword === '') {
           Painter.noKeyword(document.querySelector('[data-lz-modal] .lz-results'));
           modalNavi.classList.remove('is-active');
