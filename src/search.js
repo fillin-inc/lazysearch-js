@@ -1,8 +1,17 @@
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 
+/**
+ * Search - 検索処理クラス
+ */
 export default class Search {
-  constructor (params = null, endpoint = null) {
-    this.endpoint = 'https://api.lazysear.ch/search'
+  /**
+   * @constructor
+   *
+   * @param {Hash|null} params - 検索用パラメータ
+   * @param {String|null} endpoint - Search API URL
+   */
+  constructor(params = null, endpoint = null) {
+    this.endpoint = 'https://api.lazysear.ch/search';
     this.allowedParams = [
       'uuid',
       'keyword',
@@ -10,63 +19,97 @@ export default class Search {
       'page',
       'per_page',
       'match_count',
-      'match_length'
-    ]
+      'match_length',
+    ];
 
-    this._initParams()
-    this._updateParams(params)
+    this._initParams();
+    this._updateParams(params);
     if (endpoint !== null) {
-      this.endpoint = endpoint
+      this.endpoint = endpoint;
     }
   }
 
-  fetch (params) {
-    this._updateParams(params)
-    return window.fetch(
+  /**
+   * fetch
+   *
+   * @param {Hash} params - 検索用パラメータ
+   * @return {Promise} Response オブジェクトを含む Promise
+   */
+  fetch(params) {
+    this._updateParams(params);
+    return fetch(
       this.endpoint + '?' + this._reqQuery(),
-      { mode: 'cors' }
-    )
+      {mode: 'cors'}
+    );
   }
 
-  _reqQuery () {
-    const reqParams = this.params
+  /**
+   * リクエスト用クエリ文字列生成
+   *
+   * @return {String}
+   */
+  _reqQuery() {
+    const reqParams = this.params;
     return Object.keys(reqParams)
-      .map(k => k + '=' + encodeURIComponent(reqParams[k]))
-      .join('&')
+      .map((k) => k + '=' + encodeURIComponent(reqParams[k]))
+      .join('&');
   }
 
-  _initParams () {
+  /**
+   * 検索用パラメータ初期化
+   */
+  _initParams() {
     this.params = {
       keyword: null,
-      uuid: null
-    }
+      uuid: null,
+    };
   }
 
-  _updateParams (params) {
+  /**
+   * 検索用パラメータ更新
+   *
+   * @param {Hash} params
+   */
+  _updateParams(params) {
     if (!params || Object.keys(params).length === 0) {
-      return
+      return;
     }
 
     for (let key in params) {
       if (this.allowedParams.indexOf(key) >= 0) {
-        this.params[key] = params[key]
+        this.params[key] = params[key];
       }
     }
   }
 
-  _updateEndpoint (url) {
+  /**
+   * エンドポイント URL 更新
+   *
+   * @param {String} url
+   */
+  _updateEndpoint(url) {
     if (url !== null) {
-      this.endpoint = url
+      this.endpoint = url;
     }
   }
 
-  static getQuery () {
-    const matched = window.location.search.match(/(\?|&)q=(.*?)(&|$)/)
-    return (matched === null) ? '' : decodeURIComponent(matched[2])
+  /**
+   * 現在の URL クエリ文字列取得
+   *
+   * @return {String} クエリ文字列
+   */
+  static getQuery() {
+    const matched = location.search.match(/(\?|&)q=(.*?)(&|$)/);
+    return (matched === null) ? '' : decodeURIComponent(matched[2]);
   }
 
-  static getPageInQuery () {
-    const matched = window.location.search.match(/(\?|&)page=(\d+)(&|$)/)
-    return (matched === null) ? 1 : parseInt(matched[2], 10)
+  /**
+   * URL クエリ文字列からページ数取得
+   *
+   * @return {Number} ページ数
+   */
+  static getPageInQuery() {
+    const matched = location.search.match(/(\?|&)page=(\d+)(&|$)/);
+    return (matched === null) ? 1 : parseInt(matched[2], 10);
   }
 }
