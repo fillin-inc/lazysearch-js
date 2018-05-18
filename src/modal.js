@@ -126,6 +126,7 @@ export default class Modal {
     });
 
     // キーアップ時に入力内容が空であれば has-keyword クラスを削除
+    // eslint-disable-next-line new-cap
     this._el.querySelector('.lz-header .lz-keyword').addEventListener('keyup', Throttle(function(event) {
       self.setHasKeyword();
     }, 250));
@@ -136,6 +137,7 @@ export default class Modal {
       self.close();
     });
 
+    // eslint-disable-next-line new-cap
     window.onresize = Throttle(function() {
       self.setKeywordWidth();
       self.setLzBodyHeight();
