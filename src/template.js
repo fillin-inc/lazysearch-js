@@ -1,29 +1,49 @@
 import modal from './templates/modal.html';
 import result from './templates/result.html';
 
+/**
+ * Template
+ *
+ * テンプレートデータを管理する
+ */
 export default class Template {
-    constructor() {
-        this._setModal();
-        this._setResult();
-    }
+  /**
+   * @constructor
+   */
+  constructor() {
+    this._setModal();
+    this._setResult();
+  }
 
-    modal() {
-        return this._modal;
-    }
+  /**
+   * @return {Element} モーダルの DOM 要素
+   */
+  modal() {
+    return this._modal;
+  }
 
-    result() {
-        return this._result;
-    }
+  /**
+   * @return {Element} モーダル内の検索表示用 DOM 要素
+   */
+  result() {
+    return this._result;
+  }
 
-    _setModal() {
-        const el = document.createElement('div');
-        el.innerHTML = modal;
-        this._modal = el.querySelector('[data-lz-modal]');
-    }
+  /**
+   * モーダル DOM 作成
+   */
+  _setModal() {
+    const el = document.createElement('div');
+    el.innerHTML = modal;
+    this._modal = el.querySelector('[data-lz-modal]');
+  }
 
-    _setResult() {
-        const el = document.createElement('div');
-        el.innerHTML = result;
-        this._result = el.querySelector('.lz-result');
-    }
+  /**
+   * モーダル内の検索表示用 DOM 作成
+   */
+  _setResult() {
+    const el = document.createElement('div');
+    el.innerHTML = result;
+    this._result = el.querySelector('.lz-result');
+  }
 }
