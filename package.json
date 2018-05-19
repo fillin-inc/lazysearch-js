@@ -9,9 +9,10 @@
     "clear": "rm -r dist/* && touch dist/.gitkeep",
     "test": "jest"
   },
-  "test": {
+  "jest": {
     "transform": {
-      "^.+\\.jsx?$": "babel-jest"
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.html$": "<rootDir>/test/utils/htmlLoader.js"
     }
   },
   "repository": {
