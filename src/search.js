@@ -38,7 +38,7 @@ export default class Search {
   fetch(params) {
     this._updateParams(params);
     return fetch(
-      this.endpoint + '?' + this._reqQuery(),
+      this.endpoint + '?' + this.reqQuery(),
       {mode: 'cors'}
     );
   }
@@ -48,7 +48,7 @@ export default class Search {
    *
    * @return {String}
    */
-  _reqQuery() {
+  reqQuery() {
     const reqParams = this.params;
     return Object.keys(reqParams)
       .map((k) => k + '=' + encodeURIComponent(reqParams[k]))
@@ -91,25 +91,5 @@ export default class Search {
     if (url !== null) {
       this.endpoint = url;
     }
-  }
-
-  /**
-   * 現在の URL クエリ文字列取得
-   *
-   * @return {String} クエリ文字列
-   */
-  static getQuery() {
-    const matched = location.search.match(/(\?|&)q=(.*?)(&|$)/);
-    return (matched === null) ? '' : decodeURIComponent(matched[2]);
-  }
-
-  /**
-   * URL クエリ文字列からページ数取得
-   *
-   * @return {Number} ページ数
-   */
-  static getPageInQuery() {
-    const matched = location.search.match(/(\?|&)page=(\d+)(&|$)/);
-    return (matched === null) ? 1 : parseInt(matched[2], 10);
   }
 }
