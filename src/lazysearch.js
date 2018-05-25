@@ -32,7 +32,7 @@ export default class LazySearch {
    */
   _setSearchEvent() {
     const self = this;
-    const btnSelectors = '[data-lz] .lz-button, [data-lz] [type = submit], [data-lz-modal] .lz-header .lz-button';
+    const btnSelectors = '[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button';
     const btns = document.querySelectorAll(btnSelectors);
     const queries = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
     const btnLength = btns.length;
