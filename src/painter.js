@@ -16,7 +16,7 @@ export default class Painter {
 
     let df = document.createDocumentFragment();
     resBody.results.forEach(function(val, idx, ary) {
-      let row = (new Template()).result();
+      let row = Template.result();
       row.getElementsByTagName('a')[0].href = val.url;
       row.getElementsByTagName('h3')[0].innerHTML = escapeHtml(val.title);
       row.getElementsByClassName('url')[0].innerHTML = escapeHtml(val.url);
