@@ -60,7 +60,7 @@ export default class LazySearch {
 
         const target = event.currentTarget || event.srcElement;
         const params = (new Params()).collect(document.querySelector('[data-lz]'));
-        if (target.parentNode.classList.contains('lz-button')) {
+        if (target.parentNode.className.indexOf('lz-button') >= 0) {
           params.page = parseInt(target.parentNode.dataset.page, 10);
         }
 
