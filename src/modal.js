@@ -3,19 +3,20 @@ import Throttle from 'throttleit';
 /**
  * Modal
  *
- * controle Search Modal
+ * Modal 表示の操作管理を行う
  */
 export default class Modal {
   /**
    * @constructor
-   * @param {Element} el - モーダル用ラッパーdiv のDOM
+   *
+   * @param {Element} el - モーダル用ラッパーdiv.lz-modal のDOM
    */
   constructor(el) {
     this._el = el;
   }
 
   /**
-   * @return {Element} - モーダル用ラッパー div
+   * @return {Element} - モーダル用ラッパー div.lz-modal の DOM
    */
   el() {
     return this._el;
