@@ -1,5 +1,6 @@
 import Modal from './modal';
 import Painter from './painter';
+import Params from './params';
 import Search from './search';
 import Style from './templates/stylesheet.css';
 import Template from './template';
@@ -31,61 +32,40 @@ export default class LazySearch {
    */
   _setSearchEvent() {
     const self = this;
+
     const btnSelectors = '[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button';
-    const btns = document.querySelectorAll(btnSelectors);
-    const queries = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
+    const naviBtnSelectors = '.lz-button a';
+    const btns = document.querySelectorAll(btnSelectors + ',' + naviBtnSelectors);
     const btnLength = btns.length;
-    const queriesLength = queries.length;
-    const naviBtns = this._modal.el().querySelectorAll('.lz-button a');
-    const naviBtnsLength = naviBtns.length;
+
+    const keywords = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
+    const keywordsLength = keywords.length;
+
     const modalNavi = document.querySelector('[data-lz-modal] .lz-nav');
     let i = 0;
     let j = 0;
 
     // 関連する検索窓の入力値を連携させる
-    for (i = 0; i < queriesLength; i += 1) {
-      queries[i].addEventListener('change', function(event) {
-        for (j = 0; j < queriesLength; j += 1) {
-          if (queries[j] !== event.target) {
-            queries[j].value = event.target.value;
+    for (let keyword of keywords) {
+      keyword.addEventListener('change', function(event) {
+        for (j = 0; j < keywordsLength; j += 1) {
+          if (keywords[j] !== event.target) {
+            keywords[j].value = event.target.value;
           }
         }
       });
     }
 
-    // 検索ボタン押下時に検索を実行し結果を閲覧可能にする
-    for (i = 0; i < btnLength; i += 1) {
-      btns[i].addEventListener('click', function(event) {
+    for (let btn of btns) {
+      btn.addEventListener('click', function(event) {
         event.preventDefault();
-        let params = (new Params()).collect(document.querySelector('[data-lz]'));
-        if (!params.hasKeyword()) {
-          Painter.noKeyword(document.querySelector('[data-lz-modal] .lz-results'));
-          modalNavi.classList.remove('is-active');
-          return;
-        }
 
-        self._search
-          .fetch(params)
-          .then(self._drawResult)
-          .then(self._drawNavi);
-        self._modal.setLzBodyHeight();
-        if (!self._modal.isVisible()) {
-          self._modal.open();
-        }
-        if (document.activeElement) {
-          document.activeElement.blur();
-        }
-      });
-    }
-
-    // 次へ, 前へボタン押下時に検索を実行
-    for (i = 0; i < naviBtnsLength; i += 1) {
-      naviBtns[i].addEventListener('click', function(event) {
-        event.preventDefault();
         const target = event.currentTarget || event.srcElement;
+        const params = (new Params()).collect(document.querySelector('[data-lz]'));
+        if (target.parentNode.classList.contains('lz-button')) {
+          params.page = parseInt(target.parentNode.dataset.page, 10);
+        }
 
-        let params = (new Params()).collect(document.querySelector('[data-lz]'));
-        params.page = parseInt(target.parentNode.dataset.page, 10);
         if (!params.hasKeyword()) {
           Painter.noKeyword(document.querySelector('[data-lz-modal] .lz-results'));
           modalNavi.classList.remove('is-active');
@@ -97,9 +77,11 @@ export default class LazySearch {
           .then(self._drawResult)
           .then(self._drawNavi);
         self._modal.setLzBodyHeight();
+
         if (!self._modal.isVisible()) {
           self._modal.open();
         }
+
         if (document.activeElement) {
           document.activeElement.blur();
         }
