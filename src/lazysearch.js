@@ -23,7 +23,6 @@ export default class LazySearch {
     this._search = new Search();
     this._modal = new Modal(Template.modal());
     this._modal.append();
-    this._setTargetElements();
     this._setSearchEvent();
   }
 
@@ -58,8 +57,8 @@ export default class LazySearch {
     for (i = 0; i < btnLength; i += 1) {
       btns[i].addEventListener('click', function(event) {
         event.preventDefault();
-        let params = self._collectParams(document.querySelector('[data-lz]'));
-        if (params.keyword === null || params.keyword === '') {
+        let params = (new Params()).collect(document.querySelector('[data-lz]'));
+        if (!params.hasKeyword()) {
           Painter.noKeyword(document.querySelector('[data-lz-modal] .lz-results'));
           modalNavi.classList.remove('is-active');
           return;
@@ -85,9 +84,9 @@ export default class LazySearch {
         event.preventDefault();
         const target = event.currentTarget || event.srcElement;
 
-        let params = self._collectParams(document.querySelector('[data-lz]'));
+        let params = (new Params()).collect(document.querySelector('[data-lz]'));
         params.page = parseInt(target.parentNode.dataset.page, 10);
-        if (params.keyword === null || params.keyword === '') {
+        if (!params.hasKeyword()) {
           Painter.noKeyword(document.querySelector('[data-lz-modal] .lz-results'));
           modalNavi.classList.remove('is-active');
           return;
@@ -195,42 +194,6 @@ export default class LazySearch {
     }
 
     return info;
-  }
-
-  /**
-   * Search API へ投入可能なパラメータ名を設定
-   */
-  _setTargetElements() {
-    this._targets = ['page', 'format', 'keyword', 'per_page', 'uuid', 'match_count', 'match_length'];
-  }
-
-  /**
-   * form から Search API 用パラメータ収集
-   *
-   * @param {Element} formElm - 対象のフォームオブジェクト
-   * @return {Hash} パラメータハッシュ
-   */
-  _collectParams(formElm) {
-    const targetLength = this._targets.length;
-    let params = {};
-    let elm = null;
-
-    if (formElm === null || formElm === undefined) {
-      return params;
-    }
-
-    for (let i = 0; i < targetLength; i += 1) {
-      elm = formElm.querySelector('[name=' + this._targets[i] + ']');
-      if (elm !== null) {
-        params[this._targets[i]] = (this._targets[i].indexOf('page') !== -1) ? parseInt(elm.value, 10) : elm.value;
-      }
-      elm = null;
-    }
-
-    if (!params.page) {
-      params.page = 1;
-    }
-    return params;
   }
 
   /**

@@ -62,6 +62,16 @@ export default class Params {
       .join('&');
   }
 
+
+  /**
+   * keyword が存在するか否か
+   *
+   * @return {Boolean}
+   */
+  hasKeyword() {
+    return (this.keyword !== null && String(this.keyword).trim() !== '')
+  }
+
   /**
    * 対象のパラメータキーが数値か否か
    *

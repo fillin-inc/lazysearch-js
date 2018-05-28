@@ -87,3 +87,21 @@ test('queryString() return full query', () => {
   const expected = 'uuid=1234-5678-90&keyword=%E6%A4%9C%E7%B4%A2%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89&format=json&page=3&per_page=10&match_count=1&match_length=50'
   expect(p.queryString()).toBe(expected);
 });
+
+test('hasKeyword() return true when keyword is exists', () => {
+  const p = new Params();
+  p.keyword = 1;
+  expect(p.hasKeyword()).toBe(true);
+});
+
+test('hasKeyword() return false when keyword is not exists', () => {
+  const p = new Params();
+  p.keyword = '';
+  expect(p.hasKeyword()).toBe(false);
+});
+
+test('hasKeyword() return false when keyword is empty', () => {
+  const p = new Params();
+  p.keyword = ' ';
+  expect(p.hasKeyword()).toBe(false);
+});
