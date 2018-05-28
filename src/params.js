@@ -1,3 +1,8 @@
+/**
+ * パラメータクラス
+ *
+ * Searcu API へのリクエスト情報の管理収集を担当
+ */
 export default class Params {
   /**
    * @constructor
@@ -16,8 +21,8 @@ export default class Params {
       'page',
       'per_page',
       'match_count',
-      'match_length'
-    ]
+      'match_length',
+    ];
 
     for (let key of this._allowedParams) {
       this[key] = params.hasOwnProperty(key) ? params[key] : null;
@@ -30,7 +35,7 @@ export default class Params {
    * page パラメータが未定義の場合は常に 1
    *
    * @param {Element} formElm - 処理対象フォームエレメント
-   * @param {Params}
+   * @return {Params}
    */
   collect(formElm) {
     let keyElm = null;
@@ -51,10 +56,10 @@ export default class Params {
    * @return {String}
    */
   queryString() {
-    let params = {}
+    let params = {};
     for (let key of this._allowedParams) {
       if (this[key] !== null) {
-        params[key] = this[key]
+        params[key] = this[key];
       }
     }
     return Object.keys(params)
@@ -69,13 +74,13 @@ export default class Params {
    * @return {Boolean}
    */
   hasKeyword() {
-    return (this.keyword !== null && String(this.keyword).trim() !== '')
+    return (this.keyword !== null && String(this.keyword).trim() !== '');
   }
 
   /**
    * 対象のパラメータキーが数値か否か
    *
-   * @param {String} - パラメータのキー名
+   * @param {String} key - パラメータのキー名
    * @return {Boolean}
    */
   _isInt(key) {

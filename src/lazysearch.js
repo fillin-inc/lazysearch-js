@@ -36,21 +36,19 @@ export default class LazySearch {
     const btnSelectors = '[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button';
     const naviBtnSelectors = '.lz-button a';
     const btns = document.querySelectorAll(btnSelectors + ',' + naviBtnSelectors);
-    const btnLength = btns.length;
 
     const keywords = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
     const keywordsLength = keywords.length;
 
     const modalNavi = document.querySelector('[data-lz-modal] .lz-nav');
     let i = 0;
-    let j = 0;
 
     // 関連する検索窓の入力値を連携させる
     for (let keyword of keywords) {
       keyword.addEventListener('change', function(event) {
-        for (j = 0; j < keywordsLength; j += 1) {
-          if (keywords[j] !== event.target) {
-            keywords[j].value = event.target.value;
+        for (i = 0; i < keywordsLength; i += 1) {
+          if (keywords[i] !== event.target) {
+            keywords[i].value = event.target.value;
           }
         }
       });
