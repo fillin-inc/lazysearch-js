@@ -74,7 +74,6 @@ export default class LazySearch {
           .fetch(params)
           .then(self._drawResult)
           .then(self._drawNavi);
-        self._modal.setLzBodyHeight();
 
         if (!self._modal.isVisible()) {
           self._modal.open();

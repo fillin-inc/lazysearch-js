@@ -255,6 +255,8 @@ html, body {
 
 .lz-search-form.has-keyword > .lz-x {
   display: inline;
+  position: absolute;
+  right: 45px;
 }
 
 /*

@@ -39,9 +39,7 @@ export default class Modal {
    */
   open() {
     this._el.classList.add('is-active');
-    this.setKeywordWidth();
     this.setHasKeyword();
-    this.setLzBodyHeight();
     document.getElementsByTagName('body')[0].classList.add('lz-overflow-hidden');
   }
 
@@ -70,24 +68,6 @@ export default class Modal {
   }
 
   /**
-   * キーワード入力欄の表示幅調整
-   */
-  setKeywordWidth() {
-    const keyword = this._el.getElementsByClassName('lz-keyword')[0];
-
-    // 全体
-    const searchForm = this._el.getElementsByClassName('lz-search-form')[0];
-    // x ボタンサイズ
-    const crossWidth = 24;
-    // 検索ボタンサイズ
-    const btnWidth = 44;
-    // margin-right + border 1px * 2
-    const margin = 7;
-
-    keyword.style.width = (searchForm.clientWidth - (crossWidth + btnWidth + margin)).toString() + 'px';
-  }
-
-  /**
    * キーワードが存在する場合に class 付与
    */
   setHasKeyword() {
@@ -101,17 +81,6 @@ export default class Modal {
   }
 
   /**
-   * lz-body の高さ調整
-   */
-  setLzBodyHeight() {
-    const front = this._el.getElementsByClassName('lz-front')[0];
-    const body = this._el.getElementsByClassName('lz-body')[0];
-    const adjustment = (document.body.clientWidth >= 800) ? 115 : 85;
-
-    body.style.height = (front.clientHeight - adjustment) + 'px';
-  }
-
-  /**
    * イベント設定
    */
   _setEvent() {
@@ -120,8 +89,8 @@ export default class Modal {
     // x ボタンで検索キーワードを削除
     this._el.querySelector('.lz-header .lz-x').addEventListener('click', function(event) {
       event.preventDefault();
-      const target = event.currentTarget || event.srcElement;
-      target.previousElementSibling.value = '';
+      const target = document.querySelector('.lz-search-form .lz-keyword');
+      target.value = '';
       target.parentNode.classList.remove('has-keyword');
     });
 
@@ -136,11 +105,5 @@ export default class Modal {
       event.preventDefault();
       self.close();
     });
-
-    // eslint-disable-next-line new-cap
-    window.onresize = Throttle(function() {
-      self.setKeywordWidth();
-      self.setLzBodyHeight();
-    }, 150);
   }
 }
