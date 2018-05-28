@@ -21,7 +21,7 @@ export default class Search {
    */
   fetch(params) {
     return fetch(
-      this.endpoint + '?' + (new Params()).collect().queryString(),
+      this.endpoint + '?' + params.queryString(),
       {mode: 'cors'}
     );
   }

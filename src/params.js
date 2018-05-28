@@ -5,7 +5,7 @@ export default class Params {
    * @param {Hash} params - 検索用パラメータ
    */
   constructor(params = {}) {
-    if (typeof params !== 'object') {
+    if (params.constructor.name !== 'Object') {
       throw new Error('Invalid Argument is received');
     }
 
