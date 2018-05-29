@@ -1,4 +1,4 @@
-import LazySearch from './LazySearch';
+import LazySearch from './lazysearch';
 import Promise from 'promise-polyfill';
 
 if (!window.Promise) {
