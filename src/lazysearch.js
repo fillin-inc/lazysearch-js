@@ -23,7 +23,6 @@ export default class LazySearch {
 
     this._search = new Search();
     this._modal = new Modal(Template.modal());
-    this._modal.append();
     this._setSearchEvent();
   }
 

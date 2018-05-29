@@ -36,7 +36,7 @@ export default class Painter {
     targetElm.classList.remove('has-error');
 
     const p = document.createElement('p');
-    p.classList.add('la-result');
+    p.classList.add('lz-result');
     p.innerHTML = escapeHtml('該当するページが見つかりませんでした。');
     targetElm.innerHTML = '';
     targetElm.appendChild(p);
@@ -51,7 +51,7 @@ export default class Painter {
     targetElm.classList.remove('has-error');
 
     const p = document.createElement('p');
-    p.classList.add('la-result');
+    p.classList.add('lz-result');
     p.innerHTML = escapeHtml('サイト内検索にはキーワードの指定が必要です。');
     targetElm.innerHTML = '';
     targetElm.appendChild(p);
