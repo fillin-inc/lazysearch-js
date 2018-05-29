@@ -1,4 +1,5 @@
 import Modal from './modal';
+import ModalNavigation from './modal/navigation';
 import Painter from './painter';
 import Params from './params';
 import Search from './search';
@@ -72,7 +73,7 @@ export default class LazySearch {
         self._search
           .fetch(params)
           .then(self._drawResult)
-          .then(self._drawNavi);
+          .then(ModalNavigation.update);
 
         if (!self._modal.isVisible()) {
           self._modal.open();
@@ -126,52 +127,6 @@ export default class LazySearch {
         };
       });
     }
-  }
-
-  /**
-   * 検索結果のナビゲーション表示
-   *
-   * @param {Hash} info - _drawResult が返すハッシュ
-   * @return {Hash} パラメータと同内容のハッシュ
-   */
-  _drawNavi(info) {
-    const navi = document.querySelector('[data-lz-modal] .lz-nav');
-    const nextBtn = navi.getElementsByClassName('lz-next')[0];
-    const prevBtn = navi.getElementsByClassName('lz-prev')[0];
-
-    if (info.count) {
-      navi.getElementsByClassName('lz-total-num')[0].innerHTML = info.count;
-    }
-
-    if (info.page) {
-      const totalPage = Math.ceil(info.count / info.per_page);
-      navi.getElementsByClassName('lz-current-page')[0].innerHTML = info.page;
-      navi.getElementsByClassName('lz-total-page')[0].innerHTML = totalPage;
-    }
-
-    if (info.has_next) {
-      nextBtn.classList.add('is-active');
-      nextBtn.dataset.page = info.page + 1;
-    } else {
-      nextBtn.classList.remove('is-active');
-      nextBtn.dataset.page = 1;
-    }
-
-    if (info.page > 1) {
-      prevBtn.classList.add('is-active');
-      prevBtn.dataset.page = info.page - 1;
-    } else {
-      prevBtn.classList.remove('is-active');
-      prevBtn.dataset.page = info.page - 0;
-    }
-
-    if (info.navigation) {
-      navi.classList.add('is-active');
-    } else {
-      navi.classList.remove('is-active');
-    }
-
-    return info;
   }
 
   /**
