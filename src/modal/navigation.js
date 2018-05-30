@@ -5,19 +5,25 @@
  */
 export default class ModalNavigation {
   /**
+   * @constructor
+   */
+  constructor(el) {
+    this.el = el;
+  }
+
+  /**
    * ナビゲーション更新
    *
    * 表示対象の値が 1 つでも存在しなければナビゲーション自体を隠す
    *
    * @param {Hash} data - ナビゲーション情報
    */
-  static update(data) {
-    const el = document.querySelector('.lz-nav');
-    const nextBtn = el.getElementsByClassName('lz-next')[0];
-    const prevBtn = el.getElementsByClassName('lz-prev')[0];
-    const totalNum = el.getElementsByClassName('lz-total-num')[0];
-    const page = el.getElementsByClassName('lz-current-page')[0];
-    const totalPage = el.getElementsByClassName('lz-total-page')[0];
+  update(data) {
+    const nextBtn = this.el.getElementsByClassName('lz-next')[0];
+    const prevBtn = this.el.getElementsByClassName('lz-prev')[0];
+    const totalNum = this.el.getElementsByClassName('lz-total-num')[0];
+    const page = this.el.getElementsByClassName('lz-current-page')[0];
+    const totalPage = this.el.getElementsByClassName('lz-total-page')[0];
     let showFlg = false;
 
     if (data.count) {

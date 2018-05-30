@@ -3,7 +3,7 @@
  *
  * Searcu API へのリクエスト情報の管理収集を担当
  */
-export default class Params {
+export default class SearchParams {
   /**
    * @constructor
    */
@@ -18,9 +18,9 @@ export default class Params {
       'match_length',
     ];
 
-    for (let key of this._allowedParams) {
+    this._allowedParams.forEach((key) => {
       this[key] = null;
-    }
+    });
   }
 
   /**
@@ -33,12 +33,12 @@ export default class Params {
    */
   collect(formElm) {
     let keyElm = null;
-    for (let key of this._allowedParams) {
+    this._allowedParams.forEach((key) => {
       keyElm = formElm.querySelector('[name=' + key + ']');
       if (keyElm !== null) {
         this[key] = (this._isInt(key)) ? parseInt(keyElm.value, 10) : keyElm.value;
       }
-    }
+    });
     this.page = (this.page) ? this.page : 1;
 
     return this;
@@ -51,11 +51,12 @@ export default class Params {
    */
   queryString() {
     let params = {};
-    for (let key of this._allowedParams) {
+    this._allowedParams.forEach((key) => {
       if (this[key] !== undefined && this[key] !== null) {
         params[key] = this[key];
       }
-    }
+    });
+
     return Object.keys(params)
       .map((k) => k + '=' + encodeURIComponent(params[k]))
       .join('&');

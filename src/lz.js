@@ -6,5 +6,6 @@ if (!window.Promise) {
 }
 
 window.onload = function() {
-  new LazySearch();
+  const lz = new LazySearch();
+  lz.setEventListner();
 };

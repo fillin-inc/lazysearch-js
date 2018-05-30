@@ -1,5 +1,6 @@
 import ModalForm from './modal/form';
 import ModalResults from './modal/results';
+import ModalNavigation from './modal/navigation';
 
 /**
  * Modal
@@ -15,20 +16,11 @@ export default class Modal {
   constructor(el) {
     this.el = el;
     this.body = document.getElementsByTagName('body')[0];
-    this.form = new ModalForm(this.el.querySelector('.lz-header form'), this);
-    this.results = new ModalResults(this.el.querySelector('.lz-results'));
-    this.append();
-  }
+    this.closeLink = this.el.getElementsByClassName('lz-close')[0];
 
-  /**
-   * モーダルを body 閉じタグ直前に挿入
-   */
-  append() {
-    if (!this.body && window.console) {
-      window.console.log('lz.js could not find <body> tag.');
-      return;
-    }
-    this.body.appendChild(this.el);
+    this.form = new ModalForm(this.el.querySelector('.lz-header form'));
+    this.results = new ModalResults(this.el.querySelector('.lz-results'));
+    this.navi = new ModalNavigation(this.el.querySelector('.lz-nav'));
   }
 
   /**

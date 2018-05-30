@@ -10,17 +10,22 @@ export default class ModalForm {
    * @constructor
    *
    * @param {Element} el - モーダル内 form の DOM
-   * @param {Modal} modal - Modal オブジェクト
    */
-  constructor(el, modal) {
+  constructor(el) {
     this.el = el;
-    this.modal = modal;
 
     this.searchForm = this.el.getElementsByClassName('lz-search-form')[0];
     this.keyword = this.el.getElementsByClassName('lz-keyword')[0];
     this.x = this.el.getElementsByClassName('lz-x')[0];
-    this.close = this.el.getElementsByClassName('lz-close')[0];
-    this.setEventListner();
+  }
+
+  /**
+   * キーワード欄が空か判定
+   *
+   * @return {Boolean}
+   */
+  hasKeyword() {
+    return (String(this.keyword.value).trim() !== '')
   }
 
   /**
@@ -40,38 +45,6 @@ export default class ModalForm {
     } else {
       this.searchForm.classList.remove(ModalForm.hasKeywordClass());
     }
-  }
-
-  /**
-   * キーワード欄が空か判定
-   *
-   * @return {Boolean}
-   */
-  hasKeyword() {
-    return (String(this.keyword.value).trim() !== '')
-  }
-
-  /**
-   * イベントを設定
-   *
-   * - x クリックでキーワード欄を空に
-   * - キーワード欄のキー入力を監視し値があれば class 追加
-   * - close クリックでモーダルを閉じる
-   */
-  setEventListner() {
-    this.x.addEventListener('click', (event) => {
-      event.preventDefault();
-      this.removeKeyword();
-    });
-
-    this.keyword.addEventListener('keyup', throttle(() => {
-      this.toggleHasKeyword();
-    }, 250));
-
-    this.close.addEventListener('click', (event) => {
-      event.preventDefault();
-      this.modal.close();
-    });
   }
 
   /**
