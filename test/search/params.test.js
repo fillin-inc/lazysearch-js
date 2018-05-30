@@ -1,7 +1,7 @@
-import Params from '../src/params';
+import SearchParams from '../../src/search/params';
 
 test('initialize', () => {
-  const p = new Params();
+  const p = new SearchParams();
 
   expect(p.uuid).toBe(null)
   expect(p.keyword).toBe(null);
@@ -34,10 +34,9 @@ test('collect() update properties', () => {
   document.body.innerHTML = html;
   const elm = document.querySelector('#target');
 
-  const p = new Params();
+  const p = new SearchParams();
   const ret = p.collect(elm);
 
-  expect(ret.constructor.name).toBe('Params')
   expect(p.uuid).toBe(args.uuid)
   expect(p.keyword).toBe(args.keyword);
   expect(p.format).toBe(args.format);
@@ -48,12 +47,12 @@ test('collect() update properties', () => {
 });
 
 test('queryString() return empty string when parameter is empty', () => {
-  const p = new Params();
+  const p = new SearchParams();
   expect(p.queryString()).toBe('');
 });
 
 test('queryString() return full query', () => {
-  const p = new Params();
+  const p = new SearchParams();
   const args = {
     uuid: '1234-5678-90',
     keyword: '検索キーワード',
@@ -72,19 +71,19 @@ test('queryString() return full query', () => {
 });
 
 test('hasKeyword() return true when keyword is exists', () => {
-  const p = new Params();
+  const p = new SearchParams();
   p.keyword = 1;
   expect(p.hasKeyword()).toBe(true);
 });
 
 test('hasKeyword() return false when keyword is not exists', () => {
-  const p = new Params();
+  const p = new SearchParams();
   p.keyword = '';
   expect(p.hasKeyword()).toBe(false);
 });
 
 test('hasKeyword() return false when keyword is empty', () => {
-  const p = new Params();
+  const p = new SearchParams();
   p.keyword = ' ';
   expect(p.hasKeyword()).toBe(false);
 });

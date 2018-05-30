@@ -1,7 +1,7 @@
 /**
- * パラメータクラス
+ * SearchParams
  *
- * Searcu API へのリクエスト情報の管理収集を担当
+ * Searcu API へのリクエストパラメータの管理
  */
 export default class SearchParams {
   /**
