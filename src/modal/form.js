@@ -28,7 +28,7 @@ export default class ModalForm {
    */
   removeKeyword() {
     this.keyword.value = '';
-    this.keyword.parentNode.classList.remove(this.hasKeyword());
+    this.keyword.parentNode.classList.remove(ModalForm.hasKeywordClass());
   }
 
   /**
@@ -36,9 +36,9 @@ export default class ModalForm {
    */
   toggleHasKeyword() {
     if (this.hasKeyword()) {
-      this.searchForm.classList.add(this.hasKeyword());
+      this.searchForm.classList.add(ModalForm.hasKeywordClass());
     } else {
-      this.searchForm.classList.remove(this.hasKeyword());
+      this.searchForm.classList.remove(ModalForm.hasKeywordClass());
     }
   }
 
