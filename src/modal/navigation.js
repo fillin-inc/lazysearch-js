@@ -9,6 +9,11 @@ export default class ModalNavigation {
    */
   constructor(el) {
     this.el = el;
+    this.nextBtn = this.el.getElementsByClassName('lz-next')[0];
+    this.prevBtn = this.el.getElementsByClassName('lz-prev')[0];
+    this.totalNum = this.el.getElementsByClassName('lz-total-num')[0];
+    this.page = this.el.getElementsByClassName('lz-current-page')[0];
+    this.totalPage = this.el.getElementsByClassName('lz-total-page')[0];
   }
 
   /**
@@ -19,46 +24,38 @@ export default class ModalNavigation {
    * @param {Hash} data - ナビゲーション情報
    */
   update(data) {
-    const nextBtn = this.el.getElementsByClassName('lz-next')[0];
-    const prevBtn = this.el.getElementsByClassName('lz-prev')[0];
-    const totalNum = this.el.getElementsByClassName('lz-total-num')[0];
-    const page = this.el.getElementsByClassName('lz-current-page')[0];
-    const totalPage = this.el.getElementsByClassName('lz-total-page')[0];
     let showFlg = false;
 
-    if (data.count) {
-      totalNum.innerHTML = data.count;
+    if (data.count > 0) {
+      this.totalNum.innerHTML = data.count;
       showFlg = true;
     }
 
-    if (data.page) {
-      page.innerHTML = data.page;
-      totalPage.innerHTML = Math.ceil(data.count / data.per_page);
-      showFlg = true;
+    if (data.current_page) {
+      this.page.innerHTML = data.current_page;
+      this.totalPage.innerHTML = Math.ceil(data.count / data.per_page);
     }
 
     if (data.has_next) {
-      nextBtn.classList.add('is-active');
-      nextBtn.dataset.page = data.page + 1;
-      showFlg = true;
+      this.nextBtn.classList.add('is-active');
+      this.nextBtn.dataset.page = data.current_page + 1;
     } else {
-      nextBtn.classList.remove('is-active');
-      nextBtn.dataset.page = 1;
+      this.nextBtn.classList.remove('is-active');
+      this.nextBtn.dataset.page = 1;
     }
 
-    if (data.page > 1) {
-      prevBtn.classList.add('is-active');
-      prevBtn.dataset.page = data.page - 1;
-      showFlg = true;
+    if (data.current_page > 1) {
+      this.prevBtn.classList.add('is-active');
+      this.prevBtn.dataset.page = data.current_page - 1;
     } else {
-      prevBtn.classList.remove('is-active');
-      prevBtn.dataset.page = data.page;
+      this.prevBtn.classList.remove('is-active');
+      this.prevBtn.dataset.page = data.current_page;
     }
 
     if (showFlg) {
-      el.classList.add('is-active');
+      this.el.classList.add('is-active');
     } else {
-      el.classList.remove('is-active');
+      this.el.classList.remove('is-active');
     }
   }
 }

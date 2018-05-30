@@ -1,4 +1,5 @@
 import escapeHtml from 'escape-html';
+import ModalNavigation from './modal/navigation';
 import SearchParams from './search/params';
 import Template from './template';
 import 'whatwg-fetch';
@@ -33,8 +34,6 @@ export default class Search {
   /**
    * 検索実行と結果反映
    *
-   * TODO: ナビゲーションの管理
-   *
    * @param {Element} currentBtn - 押下された検索ボタン DOM
    * @param {Element} baseForm - 元画面のフォーム DOM
    */
@@ -43,7 +42,7 @@ export default class Search {
 
     // 次へ, 前への場合 data-page の値を利用
     if (currentBtn.parentNode && currentBtn.parentNode.className.indexOf('lz-button') >= 0) {
-      params.page = parseInt(target.parentNode.dataset.page, 10);
+      params.page = parseInt(currentBtn.parentNode.dataset.page, 10);
     }
 
     if (!params.hasKeyword()) {
@@ -66,7 +65,8 @@ export default class Search {
         }
       })
       .then(this.resolve)
-      .catch(this.reject);
+      .catch(this.reject)
+      .then(this.navigation);
   }
 
   /**
@@ -75,6 +75,7 @@ export default class Search {
    * 該当するデータが存在しない場合, ページがない旨表示
    *
    * @param {Promise} body - レスポンス body
+   * @return {Object} - レスポンス body
    */
   resolve(body) {
     const results = document.getElementsByClassName('lz-results')[0];
@@ -95,15 +96,19 @@ export default class Search {
         df.appendChild(row);
       });
     }
+
     results.classList.remove('has-error');
     results.innerHTML = '';
     results.appendChild(df);
+
+    return body;
   }
 
   /**
    * エラー表示
    *
    * @param {Promise} body - レスポンス body
+   * @return {Object} - レスポンス body
    */
   reject(body) {
     const results = document.getElementsByClassName('lz-results')[0];
@@ -124,5 +129,19 @@ export default class Search {
     results.classList.add('has-error');
     results.innerHTML = '';
     results.appendChild(df);
+
+    return body;
+  }
+
+  /**
+   * ナビゲーション表示
+   *
+   * @param {Promise} body - レスポンス body
+   * @return {Object} - レスポンス body
+   */
+  navigation(body) {
+    const modalNavi = new ModalNavigation(document.querySelector('.lz-nav'));
+    modalNavi.update(body);
+    return body;
   }
 }
