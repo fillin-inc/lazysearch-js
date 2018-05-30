@@ -4,10 +4,10 @@ import Style from './templates/stylesheet.css';
 import Template from './template';
 
 /**
- * LazySearch Object
+ * LazySearch
  *
- * - Create and Display Modal
- * - Do Search
+ * 呼び出されたページに Modal を追加し
+ * Search API を用いてサイト内検索を実施する
  */
 export default class LazySearch {
   /**
@@ -22,9 +22,18 @@ export default class LazySearch {
     this.baseForm = document.querySelector('[data-lz]');
     this.search = new Search();
     this.modal = new Modal(Template.modal());
+  }
+
+  /**
+   * モーダル DOM をページに追加
+   */
+  append() {
     document.getElementsByTagName('body')[0].appendChild(this.modal.el);
   }
 
+  /**
+   * イベント設定
+   */
   setEventListner() {
     // モーダル内の close リンクをクリック時にモーダル非表示
     this.modal.closeLink.addEventListener('click', (event) => {
@@ -73,7 +82,8 @@ export default class LazySearch {
 
   /**
    * LazySearch の検索設定が存在するか判定
-   * @return {void}
+   *
+   * @return {Boolean}
    */
   static has() {
     return document.querySelector('[data-lz]').length >= 1;
