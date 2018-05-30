@@ -6,14 +6,8 @@
 export default class Params {
   /**
    * @constructor
-   *
-   * @param {Hash} params - 検索用パラメータ
    */
-  constructor(params = {}) {
-    if (params.constructor.name !== 'Object') {
-      throw new Error('Invalid Argument is received');
-    }
-
+  constructor() {
     this._allowedParams = [
       'uuid',
       'keyword',
@@ -25,7 +19,7 @@ export default class Params {
     ];
 
     for (let key of this._allowedParams) {
-      this[key] = params.hasOwnProperty(key) ? params[key] : null;
+      this[key] = null;
     }
   }
 
@@ -58,7 +52,7 @@ export default class Params {
   queryString() {
     let params = {};
     for (let key of this._allowedParams) {
-      if (this[key] !== null) {
+      if (this[key] !== undefined && this[key] !== null) {
         params[key] = this[key];
       }
     }
