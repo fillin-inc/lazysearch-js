@@ -45,6 +45,7 @@ export default class LazySearch {
     this.modal.form.x.addEventListener('click', (event) => {
       event.preventDefault();
       this.modal.form.removeKeyword();
+      this.modal.form.keyword.dispatchEvent(new Event('change'));
     });
 
     // キーワード入力欄の入力時に class 名付与削除

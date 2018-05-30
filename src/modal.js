@@ -1,5 +1,4 @@
 import ModalForm from './modal/form';
-import ModalResults from './modal/results';
 import ModalNavigation from './modal/navigation';
 
 /**
@@ -19,7 +18,6 @@ export default class Modal {
     this.closeLink = this.el.getElementsByClassName('lz-close')[0];
 
     this.form = new ModalForm(this.el.querySelector('.lz-header form'));
-    this.results = new ModalResults(this.el.querySelector('.lz-results'));
     this.navi = new ModalNavigation(this.el.querySelector('.lz-nav'));
   }
 
