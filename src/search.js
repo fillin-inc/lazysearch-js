@@ -74,7 +74,7 @@ export default class Search {
    *
    * 該当するデータが存在しない場合, ページがない旨表示
    *
-   * @param {Promise} body - レスポンス body
+   * @param {Object} body - レスポンス body
    * @return {Object} - レスポンス body
    */
   resolve(body) {
@@ -107,7 +107,7 @@ export default class Search {
   /**
    * エラー表示
    *
-   * @param {Promise} body - レスポンス body
+   * @param {Object} body - レスポンス body
    * @return {Object} - レスポンス body
    */
   reject(body) {
@@ -136,7 +136,7 @@ export default class Search {
   /**
    * ナビゲーション表示
    *
-   * @param {Promise} body - レスポンス body
+   * @param {Object} body - レスポンス body
    * @return {Object} - レスポンス body
    */
   navigation(body) {

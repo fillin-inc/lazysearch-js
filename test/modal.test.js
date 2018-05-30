@@ -1,6 +1,8 @@
 import Modal from '../src/modal';
 import Template from '../src/template';
 
+jest.useFakeTimers();
+
 test('initialize Modal', () => {
   const el = Template.modal();
   const body = document.getElementsByTagName('body')[0];
@@ -9,9 +11,7 @@ test('initialize Modal', () => {
   const modal = new Modal(el);
   expect(modal.el).toEqual(el);
   expect(modal.body).toEqual(body);
-  expect(modal.form.constructor.name).toBe('ModalForm');
-  expect(modal.results.constructor.name).toBe('ModalResults');
-  expect(document.querySelector('[data-lz-modal]')).not.toBeNull();
+  expect(modal.form.constructor.name).toEqual('ModalForm');
 });
 
 test('isVisible() return true when Modal is visible', () => {
@@ -19,12 +19,12 @@ test('isVisible() return true when Modal is visible', () => {
   const modal = new Modal(el);
 
   el.classList.add('is-active');
-  expect((new Modal(el)).isVisible()).toBe(true);
+  expect((new Modal(el)).isVisible()).toBeTruthy();
 });
 
 test('isVisible() return false when Modal is invisible', () => {
   const el = Template.modal();
-  expect((new Modal(el)).isVisible()).toBe(false);
+  expect((new Modal(el)).isVisible()).toBeFalsy();
 });
 
 test('open() display modal', () => {
@@ -32,11 +32,10 @@ test('open() display modal', () => {
   const body = document.getElementsByTagName('body')[0];
   const modal = new Modal(el);
 
-  expect(el.className.indexOf('is-active') >= 0).toBe(false);
-  expect(body.className.indexOf('lz-overflow-hidden') >= 0).toBe(false);
-  expect(modal.open());
-  expect(el.className.indexOf('is-active') >= 0).toBe(true);
-  expect(body.className.indexOf('lz-overflow-hidden') >= 0).toBe(true);
+  modal.open();
+
+  expect(el.className.indexOf('is-active') >= 0).toBeTruthy();
+  expect(body.className.indexOf('lz-overflow-hidden') >= 0).toBeTruthy();
 });
 
 test('close() hide modal', () => {
@@ -45,11 +44,9 @@ test('close() hide modal', () => {
   const modal = new Modal(el);
 
   modal.el.classList.add('is-active');
-  expect(modal.el.className.indexOf('is-active') >= 0).toBe(true);
-  expect(body.className.indexOf('lz-overflow-hidden') >= 0).toBe(true);
   modal.close();
-  setTimeout(() => {
-    expect(modal.el.className.indexOf('is-active') >= 0).toBe(false);
-    expect(body.className.indexOf('lz-overflow-hidden') >= 0).toBe(false);
-  }, 200);
+  jest.runAllTimers();
+
+  expect(modal.el.className.indexOf('is-active') >= 0).toBeFalsy();
+  expect(body.className.indexOf('lz-overflow-hidden') >= 0).toBeFalsy();
 });

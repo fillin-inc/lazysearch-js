@@ -3,13 +3,13 @@ import SearchParams from '../../src/search/params';
 test('initialize', () => {
   const p = new SearchParams();
 
-  expect(p.uuid).toBe(null)
-  expect(p.keyword).toBe(null);
-  expect(p.format).toBe(null);
-  expect(p.page).toBe(null);
-  expect(p.per_page).toBe(null);
-  expect(p.match_count).toBe(null);
-  expect(p.match_length).toBe(null);
+  expect(p.uuid).toBeNull();
+  expect(p.keyword).toBeNull();
+  expect(p.format).toBeNull();
+  expect(p.page).toBeNull();
+  expect(p.per_page).toBeNull();
+  expect(p.match_count).toBeNull();
+  expect(p.match_length).toBeNull();
 });
 
 test('collect() update properties', () => {
@@ -37,18 +37,18 @@ test('collect() update properties', () => {
   const p = new SearchParams();
   const ret = p.collect(elm);
 
-  expect(p.uuid).toBe(args.uuid)
-  expect(p.keyword).toBe(args.keyword);
-  expect(p.format).toBe(args.format);
-  expect(p.page).toBe(args.page);
-  expect(p.per_page).toBe(args.per_page);
-  expect(p.match_count).toBe(args.match_count);
-  expect(p.match_length).toBe(args.match_length);
+  expect(p.uuid).toEqual(args.uuid)
+  expect(p.keyword).toEqual(args.keyword);
+  expect(p.format).toEqual(args.format);
+  expect(p.page).toEqual(args.page);
+  expect(p.per_page).toEqual(args.per_page);
+  expect(p.match_count).toEqual(args.match_count);
+  expect(p.match_length).toEqual(args.match_length);
 });
 
 test('queryString() return empty string when parameter is empty', () => {
   const p = new SearchParams();
-  expect(p.queryString()).toBe('');
+  expect(p.queryString()).toEqual('');
 });
 
 test('queryString() return full query', () => {
@@ -67,23 +67,23 @@ test('queryString() return full query', () => {
   }
 
   const expected = 'uuid=1234-5678-90&keyword=%E6%A4%9C%E7%B4%A2%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89&format=json&page=3&per_page=10&match_count=1&match_length=50'
-  expect(p.queryString()).toBe(expected);
+  expect(p.queryString()).toEqual(expected);
 });
 
 test('hasKeyword() return true when keyword is exists', () => {
   const p = new SearchParams();
   p.keyword = 1;
-  expect(p.hasKeyword()).toBe(true);
+  expect(p.hasKeyword()).toBeTruthy();
 });
 
 test('hasKeyword() return false when keyword is not exists', () => {
   const p = new SearchParams();
   p.keyword = '';
-  expect(p.hasKeyword()).toBe(false);
+  expect(p.hasKeyword()).toBeFalsy();
 });
 
 test('hasKeyword() return false when keyword is empty', () => {
   const p = new SearchParams();
   p.keyword = ' ';
-  expect(p.hasKeyword()).toBe(false);
+  expect(p.hasKeyword()).toBeFalsy();
 });
