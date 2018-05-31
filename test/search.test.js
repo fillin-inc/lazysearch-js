@@ -50,11 +50,14 @@ test('execute() display search result', () => {
   search.execute(btn, baseForm);
 
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      expect(document.querySelectorAll('.lz-result').length).toBeGreaterThan(1);
-      expect(document.querySelector('.lz-nav.is-active')).not.toBeNull();
-      resolve();
-    }, 500);
+    while(true) {
+      if (document.querySelectorAll('.lz-result').length > 0) {
+        break;
+      }
+    }
+    expect(document.querySelectorAll('.lz-result').length).toBeGreaterThan(1);
+    expect(document.querySelector('.lz-nav.is-active')).not.toBeNull();
+    resolve();
   });
 });
 
@@ -79,11 +82,14 @@ test('execute() display error when uuid is empty', () => {
   search.execute(btn, baseForm);
 
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      expect(document.querySelector('.lz-result').innerHTML).toEqual('param:uuid is empty (4201)');
-      expect(document.querySelector('.has-error')).not.toBeNull();
-      expect(document.querySelector('.lz-nav.is-active')).toBeNull();
-      resolve();
-    }, 500);
+    while(true) {
+      if (document.querySelectorAll('.lz-result').length > 0) {
+        break;
+      }
+    }
+    expect(document.querySelector('.lz-result').innerHTML).toEqual('param:uuid is empty (4201)');
+    expect(document.querySelector('.has-error')).not.toBeNull();
+    expect(document.querySelector('.lz-nav.is-active')).toBeNull();
+    resolve();
   });
 });
