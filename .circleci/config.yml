@@ -18,9 +18,49 @@ jobs:
       - run: |
           npm run-script test
           npm run-script lint
+  build:
+    working_directory: ~/lazysearch-js
+    docker:
+      - image: circleci/node:8.11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-cache-{{ checksum "package-lock.json" }}
+            - npm-cache-
+      - run: |
+          npm install
+      - save_cache:
+          key: npm-cache-{{ checksum "package-lock.json" }}
+          paths: node_modules
+      - run: |
+          npm run-script build
+          mkdir -p dist/with-version
+          cp dist/lz.js dist/with-version/lz-$(git describe --tags --abbrev=0).js
+          git describe --tags --abbrev=0 | sed -e 's/^v//' > dist/with-version/VERSION
+      - persist_to_workspace:
+          root: dist
+          paths: with-version
+
+  deploy:
+    working_directory: ~/lazysearch-js
+    docker:
+      - image: yterajima/ghr:latest
+    steps:
+      - attach_workspace:
+          at: dist
+      - run: |
+          ls -al dist/with-version/
+          cat dist/with-version/VERSION
 
 workflows:
   version: 2
   test:
     jobs:
       - jest
+  deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
