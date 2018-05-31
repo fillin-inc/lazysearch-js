@@ -63,12 +63,18 @@ export default class LazySearch {
     });
 
     // 検索ボタン押下時に検索を実行し結果を反映
+    const modalBody = document.querySelector('.lz-body');
+    const modalResults = document.querySelector('.lz-results');
     const btnSelectors = '[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button';
     const naviBtnSelectors = '.lz-button a';
     const btns = document.querySelectorAll(btnSelectors + ',' + naviBtnSelectors);
     Array.prototype.slice.call(btns, 0).forEach((btn) => {
       btn.addEventListener('click', (event) => {
         event.preventDefault();
+        if (modalBody.scrollTop > 0) {
+          modalBody.scrollTop = 0;
+        }
+
         this.search.execute(btn, this.baseForm);
 
         if (!this.modal.isVisible()) {
