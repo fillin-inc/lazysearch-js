@@ -246,6 +246,11 @@
   right: 45px;
 }
 
+/* for Edge */
+.lz-search-form > .lz-keyword::-ms-clear {
+  display: none;
+}
+
 /*
  * iOS Scroll support
  */

@@ -135,6 +135,11 @@ html, body {
   cursor: pointer;
 }
 
+/* for Edge */
+.lz-search-form > .lz-keyword::-ms-clear {
+  display: none;
+}
+
 .lz-search-form > .lz-button {
   background: #46A1EF;
   width: 44px;
