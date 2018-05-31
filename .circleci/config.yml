@@ -51,7 +51,7 @@ jobs:
           at: dist
       - run: |
           cat dist/with-version/VERSION
-          ghr -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME `cat dist/with-version/VERSION` dist/with-version/lz-`cat dist/with-version/VERSION`.js
+          ghr -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME v`cat dist/with-version/VERSION` dist/with-version/lz-`cat dist/with-version/VERSION`.js
 
 workflows:
   version: 2
