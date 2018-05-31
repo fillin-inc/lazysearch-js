@@ -15,7 +15,9 @@ jobs:
       - save_cache:
           key: npm-cache-{{ checksum "package-lock.json" }}
           paths: node_modules
-      - run: npm run-script test
+      - run: |
+          npm run-script test
+          npm run-script lint
 
 workflows:
   version: 2

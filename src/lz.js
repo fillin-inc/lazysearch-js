@@ -1,4 +1,4 @@
-import LazySearch from './LazySearch';
+import LazySearch from './lazysearch';
 import Promise from 'promise-polyfill';
 
 if (!window.Promise) {
@@ -6,5 +6,7 @@ if (!window.Promise) {
 }
 
 window.onload = function() {
-  new LazySearch();
+  const lz = new LazySearch();
+  lz.append();
+  lz.setEventListner();
 };

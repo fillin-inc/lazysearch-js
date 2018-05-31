@@ -104,6 +104,7 @@
   height: 30px;
   margin-left: 5px;
   position: relative;
+  width: calc(100% - 75px);
 }
 
 .lz-search-form > .lz-keyword:focus,
@@ -242,6 +243,8 @@
 
 .lz-search-form.has-keyword > .lz-x {
   display: inline;
+  position: absolute;
+  right: 45px;
 }
 
 /*
