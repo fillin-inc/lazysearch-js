@@ -18,9 +18,59 @@ jobs:
       - run: |
           npm run-script test
           npm run-script lint
+  build:
+    working_directory: ~/lazysearch-js
+    docker:
+      - image: circleci/node:8.11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-cache-{{ checksum "package-lock.json" }}
+            - npm-cache-
+      - run: |
+          npm install
+      - save_cache:
+          key: npm-cache-{{ checksum "package-lock.json" }}
+          paths: node_modules
+      - run: |
+          npm run-script build
+          mkdir -p dist/with-version
+          cp dist/lz.js dist/with-version/lz-$(git describe --tags --abbrev=0).js
+          git describe --tags --abbrev=0 | sed -e 's/^v//' > dist/with-version/VERSION
+      - persist_to_workspace:
+          root: dist
+          paths: with-version
+
+  deploy:
+    working_directory: ~/lazysearch-js
+    docker:
+      - image: yterajima/ghr:latest
+    steps:
+      - attach_workspace:
+          at: dist
+      - run: |
+          cat dist/with-version/VERSION
+          ghr -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME `cat dist/with-version/VERSION` dist/with-version/lz-`cat dist/with-version/VERSION`.js
 
 workflows:
   version: 2
   test:
     jobs:
       - jest
+  deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^\d{1,3}\.\d{1,3}\.\d{1,3}$/
+            branches:
+              ignore: /.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^\d{1,3}\.\d{1,3}\.\d{1,3}$/
+            branches:
+              ignore: /.*/
