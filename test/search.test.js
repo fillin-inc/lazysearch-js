@@ -54,7 +54,7 @@ test('execute() display search result', () => {
       expect(document.querySelectorAll('.lz-result').length).toBeGreaterThan(1);
       expect(document.querySelector('.lz-nav.is-active')).not.toBeNull();
       resolve();
-    }, 500);
+    }, 1000);
   });
 });
 
@@ -84,6 +84,6 @@ test('execute() display error when uuid is empty', () => {
       expect(document.querySelector('.has-error')).not.toBeNull();
       expect(document.querySelector('.lz-nav.is-active')).toBeNull();
       resolve();
-    }, 500);
+    }, 1000);
   });
 });
