@@ -58,7 +58,8 @@ html, body {
   width: 100%;
 
   position: fixed;
-  top: 10px;
+  top: 0;
+  left: 0;
 
   display: flex;
   flex-direction: row;
@@ -66,7 +67,6 @@ html, body {
 }
 
 .lz-modal .lz-search-block {
-  height: 96%;
   width: 60%;
 
   border-radius: 7px;
@@ -152,7 +152,7 @@ html, body {
 }
 
 .lz-modal .lz-body {
-  height: 87.5vh;
+  height: 86.5%;
   padding-left: 25px;
   padding-right: 25px;
   overflow-y: scroll;
