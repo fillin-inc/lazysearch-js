@@ -54,7 +54,8 @@ export default class LazySearch {
     });
 
     // キーワード欄の値変更時に他のキーワード欄と値を同期
-    const keywords = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
+    const keywordsNode = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
+    const keywords = Array.prototype.slice.call(keywordsNode, 0);
     keywords.forEach((keyword) => {
       keyword.addEventListener('change', (event) => {
         this.search.reflectKeywordValue(keyword, keywords);
@@ -65,7 +66,7 @@ export default class LazySearch {
     const btnSelectors = '[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button';
     const naviBtnSelectors = '.lz-button a';
     const btns = document.querySelectorAll(btnSelectors + ',' + naviBtnSelectors);
-    btns.forEach((btn) => {
+    Array.prototype.slice.call(btns, 0).forEach((btn) => {
       btn.addEventListener('click', (event) => {
         event.preventDefault();
         this.search.execute(btn, this.baseForm);
