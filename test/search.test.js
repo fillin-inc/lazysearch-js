@@ -1,5 +1,7 @@
 import Search from '../src/search';
 import Template from '../src/template';
+import nock from 'nock';
+import UtilData from './utils/data';
 
 beforeEach(() => {
   const baseForm = `
@@ -43,6 +45,12 @@ test('reflectKeywordValue() change another input value', () => {
 });
 
 test('execute() display search result', () => {
+  const data = UtilData.searchExecuteOk();
+  nock(data.host)
+    .defaultReplyHeaders({'access-control-allow-origin': '*'})
+    .get(data.path)
+    .reply(200, data.response);
+
   const search = new Search();
   const btn = document.querySelector('.lz-button');
   const baseForm = document.getElementById('base-form');
@@ -54,7 +62,7 @@ test('execute() display search result', () => {
       expect(document.querySelectorAll('.lz-result').length).toBeGreaterThan(1);
       expect(document.querySelector('.lz-nav.is-active')).not.toBeNull();
       resolve();
-    }, 500);
+    }, 50);
   });
 });
 
@@ -70,7 +78,14 @@ test('execute() display error when keyword is empty', () => {
 });
 
 test('execute() display error when uuid is empty', () => {
-  document.querySelector('[name=uuid]').value = '';
+  const data = UtilData.searchExecuteNoUUID();
+  nock(data.host)
+    .defaultReplyHeaders({'access-control-allow-origin': '*'})
+    .get(data.path)
+    .reply(400, data.response);
+
+  const uuid = document.querySelector('[name=uuid]');
+  uuid.parentNode.removeChild(uuid);
   document.querySelector('[name=keyword]').value = 'api';
 
   const search = new Search();
@@ -80,10 +95,10 @@ test('execute() display error when uuid is empty', () => {
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      expect(document.querySelector('.lz-result').innerHTML).toEqual('param:uuid is empty (4201)');
+      expect(document.querySelector('.lz-result').innerHTML).toEqual('param:uuid is not exist (4202)');
       expect(document.querySelector('.has-error')).not.toBeNull();
       expect(document.querySelector('.lz-nav.is-active')).toBeNull();
       resolve();
-    }, 500);
+    }, 50);
   });
 });
