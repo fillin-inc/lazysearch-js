@@ -7,7 +7,7 @@
     "build": "webpack --mode production --bail",
     "watch": "webpack --mode development -d --watch",
     "clear": "rm -r dist/* && touch dist/.gitkeep",
-    "test": "jest",
+    "test": "jest -i",
     "lint": "eslint *"
   },
   "jest": {
