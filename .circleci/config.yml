@@ -50,8 +50,8 @@ jobs:
       - attach_workspace:
           at: dist
       - run: |
-          ls -al dist/with-version/
           cat dist/with-version/VERSION
+          ghr -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME `cat dist/with-version/VERSION` dist/with-version/lz-`cat dist/with-version/VERSION`.js
 
 workflows:
   version: 2
@@ -60,7 +60,17 @@ workflows:
       - jest
   deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: /^\d{1,3}\.\d{1,3}\.\d{1,3}$/
+            branches:
+              ignore: /.*/
       - deploy:
           requires:
             - build
+          filters:
+            tags:
+              only: /^\d{1,3}\.\d{1,3}\.\d{1,3}$/
+            branches:
+              ignore: /.*/
