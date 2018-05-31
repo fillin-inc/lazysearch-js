@@ -1,5 +1,4 @@
 import ModalNavigation from '../../src/modal/navigation';
-import Template from '../../src/template';
 
 beforeEach(() => {
   const html = `<nav class="lz-nav is-active">

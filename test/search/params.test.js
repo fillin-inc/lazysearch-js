@@ -20,7 +20,7 @@ test('collect() update properties', () => {
     page: 1,
     per_page: 10,
     match_count: 1,
-    match_length: 150
+    match_length: 150,
   };
   const html = `<form id="target">
                   <input type="text" name="uuid" value="${args.uuid}">
@@ -32,12 +32,12 @@ test('collect() update properties', () => {
                   <input type="text" name="match_length" value="${args.match_length}">
                 </form>`;
   document.body.innerHTML = html;
+
   const elm = document.querySelector('#target');
-
   const p = new SearchParams();
-  const ret = p.collect(elm);
+  p.collect(elm);
 
-  expect(p.uuid).toEqual(args.uuid)
+  expect(p.uuid).toEqual(args.uuid);
   expect(p.keyword).toEqual(args.keyword);
   expect(p.format).toEqual(args.format);
   expect(p.page).toEqual(args.page);
@@ -60,13 +60,17 @@ test('queryString() return full query', () => {
     page: 3,
     per_page: 10,
     match_count: 1,
-    match_length: 50
-  }
+    match_length: 50,
+  };
+
   for (let key in args) {
-    p[key] = args[key]
+    if (args.hasOwnProperty(key)) {
+      p[key] = args[key];
+    }
   }
 
-  const expected = 'uuid=1234-5678-90&keyword=%E6%A4%9C%E7%B4%A2%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89&format=json&page=3&per_page=10&match_count=1&match_length=50'
+  // eslint-disable-next-line max-len
+  const expected = 'uuid=1234-5678-90&keyword=%E6%A4%9C%E7%B4%A2%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89&format=json&page=3&per_page=10&match_count=1&match_length=50';
   expect(p.queryString()).toEqual(expected);
 });
 

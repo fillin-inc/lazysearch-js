@@ -57,7 +57,7 @@ export default class LazySearch {
     const keywords = document.querySelectorAll('[data-lz] [name=keyword], [data-lz-modal] [name=keyword]');
     keywords.forEach((keyword) => {
       keyword.addEventListener('change', (event) => {
-          this.search.reflectKeywordValue(keyword, keywords);
+        this.search.reflectKeywordValue(keyword, keywords);
       });
     });
 

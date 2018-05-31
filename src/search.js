@@ -61,7 +61,7 @@ export default class Search {
         if (response.ok) {
           return response.json();
         } else {
-          return response.json().then((body) => Promise.reject(body))
+          return response.json().then((body) => Promise.reject(body));
         }
       })
       .then(this.resolve)

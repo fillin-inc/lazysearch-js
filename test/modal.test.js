@@ -1,8 +1,6 @@
 import Modal from '../src/modal';
 import Template from '../src/template';
 
-jest.useFakeTimers();
-
 test('initialize Modal', () => {
   const el = Template.modal();
   const body = document.getElementsByTagName('body')[0];
@@ -16,8 +14,6 @@ test('initialize Modal', () => {
 
 test('isVisible() return true when Modal is visible', () => {
   const el = Template.modal();
-  const modal = new Modal(el);
-
   el.classList.add('is-active');
   expect((new Modal(el)).isVisible()).toBeTruthy();
 });
@@ -39,6 +35,8 @@ test('open() display modal', () => {
 });
 
 test('close() hide modal', () => {
+  jest.useFakeTimers();
+
   const el = Template.modal();
   const body = document.getElementsByTagName('body')[0];
   const modal = new Modal(el);

@@ -1,5 +1,3 @@
-import throttle from 'throttleit';
-
 /**
  * ModalForm
  *
@@ -25,7 +23,7 @@ export default class ModalForm {
    * @return {Boolean}
    */
   hasKeyword() {
-    return (String(this.keyword.value).trim() !== '')
+    return (String(this.keyword.value).trim() !== '');
   }
 
   /**

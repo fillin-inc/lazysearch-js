@@ -6,6 +6,8 @@
 export default class ModalNavigation {
   /**
    * @constructor
+   *
+   * @param {Element} el - ナビゲーション DOM
    */
   constructor(el) {
     this.el = el;
