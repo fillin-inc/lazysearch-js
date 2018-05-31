@@ -53,6 +53,7 @@ export default class Search {
       results.classList.add('has-error');
       results.innerHTML = '';
       results.appendChild(p);
+      document.querySelector('.lz-nav').classList.remove('is-active');
       return;
     }
 
