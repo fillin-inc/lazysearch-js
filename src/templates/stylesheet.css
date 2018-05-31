@@ -47,7 +47,7 @@
   width: 100%;
 
   position: fixed;
-  top: 10px;
+  top: 0;
   left: 0;
 
   display: flex;
@@ -56,7 +56,6 @@
 }
 
 .lz-modal .lz-search-block {
-  height: 96%;
   width: 60%;
   min-width: 800px;
 
@@ -104,6 +103,7 @@
   height: 30px;
   margin-left: 5px;
   position: relative;
+  width: calc(100% - 75px);
 }
 
 .lz-search-form > .lz-keyword:focus,
@@ -142,7 +142,7 @@
 }
 
 .lz-modal .lz-body {
-  height: 87.5vh;
+  height: 86.5%;
   padding-left: 25px;
   padding-right: 25px;
   overflow-y: scroll;
@@ -242,6 +242,13 @@
 
 .lz-search-form.has-keyword > .lz-x {
   display: inline;
+  position: absolute;
+  right: 45px;
+}
+
+/* for Edge */
+.lz-search-form > .lz-keyword::-ms-clear {
+  display: none;
 }
 
 /*

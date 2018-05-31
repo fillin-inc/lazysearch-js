@@ -1,29 +1,27 @@
 import modal from './templates/modal.html';
 import result from './templates/result.html';
 
+/**
+ * Template
+ *
+ * テンプレートデータを管理する
+ */
 export default class Template {
-    constructor() {
-        this._setModal();
-        this._setResult();
-    }
+  /**
+   * @return {Element} モーダルの DOM 要素
+   */
+  static modal() {
+    const el = document.createElement('div');
+    el.innerHTML = modal;
+    return el.querySelector('[data-lz-modal]');
+  }
 
-    modal() {
-        return this._modal;
-    }
-
-    result() {
-        return this._result;
-    }
-
-    _setModal() {
-        const el = document.createElement('div');
-        el.innerHTML = modal;
-        this._modal = el.querySelector('[data-lz-modal]');
-    }
-
-    _setResult() {
-        const el = document.createElement('div');
-        el.innerHTML = result;
-        this._result = el.querySelector('.lz-result');
-    }
+  /**
+   * @return {Element} モーダル内の検索表示用 DOM 要素
+   */
+  static result() {
+    const el = document.createElement('div');
+    el.innerHTML = result;
+    return el.querySelector('.lz-result');
+  }
 }
