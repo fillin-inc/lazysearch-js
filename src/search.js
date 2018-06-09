@@ -143,6 +143,7 @@ export default class Search {
   navigation(body) {
     const modalNavi = new ModalNavigation(document.querySelector('.lz-nav'));
     modalNavi.update(body);
+    document.querySelector('.lz-body').scrollTop = 0;
     return body;
   }
 }
