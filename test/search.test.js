@@ -62,7 +62,7 @@ test('execute() display search result', () => {
       expect(document.querySelectorAll('.lz-result').length).toBeGreaterThan(1);
       expect(document.querySelector('.lz-nav.is-active')).not.toBeNull();
       resolve();
-    }, 50);
+    }, 100);
   });
 });
 
