@@ -102,3 +102,36 @@ test('execute() display error when uuid is empty', () => {
     }, 50);
   });
 });
+
+test('execute() and executeReadMore() display search result', () => {
+  const data = UtilData.searchExecuteOk();
+  nock(data.host)
+    .defaultReplyHeaders({'access-control-allow-origin': '*'})
+    .get(data.path)
+    .reply(200, data.response);
+
+  const dataMore = UtilData.searchExecuteReadMoreOk();
+  nock(dataMore.host)
+    .defaultReplyHeaders({'access-control-allow-origin': '*'})
+    .get(dataMore.path)
+    .reply(200, dataMore.response);
+
+  const search = new Search();
+  const btn = document.querySelector('.lz-button');
+  const baseForm = document.getElementById('base-form');
+  document.getElementsByName('keyword')[0].value = 'api';
+  search.execute(btn, baseForm);
+
+  setTimeout(() => {
+    const moreBtn = document.querySelector('.lz-more-read');
+    search.executeReadMore(moreBtn, baseForm);
+  }, 100);
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      expect(document.querySelectorAll('.lz-result').length).toBe(4);
+      expect(document.querySelector('.lz-nav.is-active')).toBeNull();
+      resolve();
+    }, 200);
+  });
+});
