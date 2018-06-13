@@ -40,8 +40,8 @@ export default class Search {
   execute(currentBtn, baseForm) {
     const params = (new SearchParams()).collect(baseForm);
 
-    // 次へ, 前への場合 data-page の値を利用
-    if (currentBtn.parentNode && currentBtn.parentNode.className.indexOf('lz-button') >= 0) {
+    // もっと読むの場合, data-page 参照
+    if (currentBtn.className.indexOf('lz-more-read') >= 0) {
       params.page = parseInt(currentBtn.parentNode.dataset.page, 10);
     }
 
@@ -99,7 +99,6 @@ export default class Search {
     }
 
     results.classList.remove('has-error');
-    results.innerHTML = '';
     results.appendChild(df);
 
     return body;
