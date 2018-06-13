@@ -158,8 +158,6 @@ html, body {
 
 .lz-modal .lz-body {
   height: calc(100% - 85px);
-  padding-left: 25px;
-  padding-right: 25px;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   border-bottom: 1px solid rgba(60, 60, 60, .15);
@@ -171,6 +169,8 @@ html, body {
 
 .lz-body .lz-result {
   margin-top: 1.39em;
+  padding-left: 12px;
+  padding-right: 12px;
   font-size: 13px;
 }
 
@@ -196,10 +196,6 @@ html, body {
   text-overflow: ellipsis;
 }
 
-.lz-body .desc {
-  margin-top: .2em;
-}
-
 .lz-body .desc .keyword {
   font-weight: bold;
 }
@@ -209,6 +205,8 @@ html, body {
   position: relative;
   margin-top: 2.5em;
   margin-bottom: 1.3em;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .lz-more-read {
@@ -232,7 +230,7 @@ html, body {
 .lz-more-read .more:before {
   content: '▽';
   position: absolute;
-  left: 20px;
+  left: 30px;
   top: 2px;
 }
 
