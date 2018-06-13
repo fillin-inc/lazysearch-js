@@ -40,11 +40,6 @@ export default class Search {
   execute(currentBtn, baseForm) {
     const params = (new SearchParams()).collect(baseForm);
 
-    // もっと読むの場合, data-page 参照
-    if (currentBtn.className.indexOf('lz-more-read') >= 0) {
-      params.page = parseInt(currentBtn.parentNode.dataset.page, 10);
-    }
-
     if (!params.hasKeyword()) {
       const results = document.getElementsByClassName('lz-results')[0];
       const p = document.createElement('p');

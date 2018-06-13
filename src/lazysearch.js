@@ -64,8 +64,7 @@ export default class LazySearch {
 
     // 検索ボタン押下時に検索を実行し結果を反映
     const btnSelectors = '[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button';
-    const naviBtnSelectors = '.lz-more-read';
-    const btns = document.querySelectorAll(btnSelectors + ',' + naviBtnSelectors);
+    const btns = document.querySelectorAll(btnSelectors);
     Array.prototype.slice.call(btns, 0).forEach((btn) => {
       btn.addEventListener('click', (event) => {
         event.preventDefault();
