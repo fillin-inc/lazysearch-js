@@ -158,8 +158,6 @@ html, body {
 
 .lz-modal .lz-body {
   height: calc(100% - 85px);
-  padding-left: 25px;
-  padding-right: 25px;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   border-bottom: 1px solid rgba(60, 60, 60, .15);
@@ -171,6 +169,8 @@ html, body {
 
 .lz-body .lz-result {
   margin-top: 1.39em;
+  padding-left: 12px;
+  padding-right: 12px;
   font-size: 13px;
 }
 
@@ -196,55 +196,58 @@ html, body {
   text-overflow: ellipsis;
 }
 
-.lz-body .desc {
-  margin-top: .2em;
-}
-
 .lz-body .desc .keyword {
   font-weight: bold;
 }
 
 .lz-modal .lz-nav {
   display: none;
-  flex-direction: row;
-  justify-content: space-around;
   position: relative;
   margin-top: 2.5em;
   margin-bottom: 1.3em;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
-.lz-nav .lz-button {
-  margin-top: 1em;
-  font-size: 13px;
-  font-family: arial, sans-serif;
-  width: 5.5em;
-}
+.lz-read-more {
+  display: block;
+  margin: 0 auto;
+  line-height: 2.8;
+  color: #565656;
+  border: 1px solid #aaa;
+  border-radius: 20px;
 
-.lz-nav .lz-button a {
-  display: none;
-  padding: .5em .75em;
-  color: #444;
-  border: 1px solid #999;
-  border-radius: 5px;
   text-decoration: none;
-  box-shadow: 1px 2px 2px #999;
-}
-
-.lz-nav .lz-button a:focus {
-  box-shadow: none;
-}
-
-.lz-nav .lz-page-status {
-  text-align: center;
-}
-
-.lz-total-num {
   font-size: 14px;
 }
 
-.lz-num-suffix {
-  font-size: 13px;
-  padding-left: .5em;
+.lz-read-more .more {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.lz-read-more .more:before {
+  content: '▽';
+  position: absolute;
+  left: 30px;
+  top: 2px;
+}
+
+.lz-read-more.is-loading {
+  border: none;
+  color: #999;
+
+  animation: lzFlashText .5s ease 0s 1 normal;
+  -webkit-animation: lzFlashText .5s ease 0s 1 normal;
+}
+
+.lz-read-more.is-loading .more:before {
+  content: '';
+}
+
+.lz-modal .lz-nav.is-active {
+  display: block;
 }
 
 .lz-modal.is-active {
@@ -253,10 +256,6 @@ html, body {
 
 .lz-nav.is-active {
   display: flex;
-}
-
-.lz-button.is-active > a {
-  display: block;
 }
 
 .lz-search-form.has-keyword > .lz-x {
