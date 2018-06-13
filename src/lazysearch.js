@@ -79,6 +79,17 @@ export default class LazySearch {
         }
       });
     });
+
+    // 「もっと見る」ボタンの処理
+    const readMoreBtn = document.getElementById('lz-more-read');
+    readMoreBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      this.search.executeReadMore(readMoreBtn, this.baseForm);
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
+    });
   }
 
   /**
