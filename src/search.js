@@ -99,6 +99,7 @@ export default class Search {
     }
 
     results.classList.remove('has-error');
+    results.innerHTML = '';
     results.appendChild(df);
 
     return body;
