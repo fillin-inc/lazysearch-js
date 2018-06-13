@@ -64,8 +64,7 @@ export default class LazySearch {
 
     // 検索ボタン押下時に検索を実行し結果を反映
     const btnSelectors = '[data-lz] .lz-button, [data-lz] [type=submit], [data-lz-modal] .lz-header .lz-button';
-    const naviBtnSelectors = '.lz-button a';
-    const btns = document.querySelectorAll(btnSelectors + ',' + naviBtnSelectors);
+    const btns = document.querySelectorAll(btnSelectors);
     Array.prototype.slice.call(btns, 0).forEach((btn) => {
       btn.addEventListener('click', (event) => {
         event.preventDefault();
@@ -79,6 +78,17 @@ export default class LazySearch {
           document.activeElement.blur();
         }
       });
+    });
+
+    // 「もっと見る」ボタンの処理
+    const readMoreBtn = document.getElementById('lz-read-more');
+    readMoreBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      this.search.executeReadMore(readMoreBtn, this.baseForm);
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
     });
   }
 
