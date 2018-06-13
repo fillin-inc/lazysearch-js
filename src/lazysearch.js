@@ -81,7 +81,7 @@ export default class LazySearch {
     });
 
     // 「もっと見る」ボタンの処理
-    const readMoreBtn = document.getElementById('lz-more-read');
+    const readMoreBtn = document.getElementById('lz-read-more');
     readMoreBtn.addEventListener('click', (event) => {
       event.preventDefault();
 

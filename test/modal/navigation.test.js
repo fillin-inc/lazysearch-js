@@ -2,8 +2,8 @@ import ModalNavigation from '../../src/modal/navigation';
 
 beforeEach(() => {
   const html = `<nav class="lz-nav is-active">
-                  <a id="lz-more-read" class="lz-more-read" href="#">
-                    <span class="more" data-loading="Loading..." data-normal="もっと見る">もっと見る</span>
+                  <a id="lz-read-more" class="lz-read-more" href="#">
+                    <span class="more">もっと見る</span>
                   </a>
                </nav>`;
   document.body.innerHTML = html;

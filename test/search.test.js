@@ -123,7 +123,7 @@ test('execute() and executeReadMore() display search result', () => {
   search.execute(btn, baseForm);
 
   setTimeout(() => {
-    const moreBtn = document.querySelector('.lz-more-read');
+    const moreBtn = document.querySelector('.lz-read-more');
     search.executeReadMore(moreBtn, baseForm);
   }, 100);
 

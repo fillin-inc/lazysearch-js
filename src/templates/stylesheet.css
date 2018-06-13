@@ -190,7 +190,7 @@
   padding-right: 12px;
 }
 
-.lz-more-read {
+.lz-read-more {
   display: block;
   margin: 0 auto;
   line-height: 2.8;
@@ -202,20 +202,20 @@
   font-size: 14px;
 }
 
-.lz-more-read .more {
+.lz-read-more .more {
   display: inline-block;
   width: 100%;
   text-align: center;
 }
 
-.lz-more-read .more:before {
+.lz-read-more .more:before {
   content: '▽';
   position: absolute;
   left: 30px;
   top: 2px;
 }
 
-.lz-more-read.is-loading {
+.lz-read-more.is-loading {
   border: none;
   color: #999;
 
@@ -223,7 +223,7 @@
   -webkit-animation: lzFlashText .5s ease 0s 1 normal;
 }
 
-.lz-more-read.is-loading .more:before {
+.lz-read-more.is-loading .more:before {
   content: '';
 }
 
