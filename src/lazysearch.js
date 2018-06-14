@@ -41,6 +41,14 @@ export default class LazySearch {
       this.modal.close();
     });
 
+    // モーダル背景クリック時にモーダル非表示
+    document.querySelector('.lz-front').addEventListener('click', (event) => {
+      event.preventDefault();
+      if (event.target.className.indexOf('lz-front') >= 0) {
+        this.modal.close();
+      }
+    });
+
     // キーワード欄の x クリック時にキーワード欄を空
     this.modal.form.x.addEventListener('click', (event) => {
       event.preventDefault();
