@@ -162,8 +162,12 @@ export default class Search {
       p.innerHTML = 'キーワードに該当するページが見つかりませんでした。';
       df.appendChild(p);
     } else {
-      body.results.forEach((val) => {
+      body.results.forEach((val, idx) => {
         let row = Template.result();
+        if (idx === 0) {
+          row.classList.add('lz-read-more-first');
+        }
+
         row.getElementsByTagName('a')[0].href = val.url;
         row.getElementsByTagName('h3')[0].innerHTML = escapeHtml(val.title);
         row.getElementsByClassName('url')[0].innerHTML = escapeHtml(val.url);

@@ -246,6 +246,11 @@ html, body {
   content: '';
 }
 
+.lz-read-more-first {
+  padding-top: 1.25em;
+  border-top: 1px solid #eaeaea;
+}
+
 .lz-modal .lz-nav.is-active {
   display: block;
 }
