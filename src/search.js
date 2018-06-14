@@ -139,6 +139,7 @@ export default class Search {
 
     results.classList.remove('has-error');
     results.innerHTML = '';
+    document.querySelector('.lz-body').scrollTop = 0;
     results.appendChild(df);
 
     return body;
@@ -206,6 +207,7 @@ export default class Search {
 
     results.classList.add('has-error');
     results.innerHTML = '';
+    document.querySelector('.lz-body').scrollTop = 0;
     results.appendChild(df);
 
     return body;
@@ -220,7 +222,6 @@ export default class Search {
   navigation(body) {
     const modalNavi = new ModalNavigation(document.querySelector('.lz-nav'));
     modalNavi.update(body);
-    document.querySelector('.lz-body').scrollTop = 0;
     return body;
   }
 }
