@@ -43,8 +43,8 @@ export default class LazySearch {
 
     // モーダル背景クリック時にモーダル非表示
     document.querySelector('.lz-front').addEventListener('click', (event) => {
-      event.preventDefault();
       if (event.target.className.indexOf('lz-front') >= 0) {
+        event.preventDefault();
         this.modal.close();
       }
     });
